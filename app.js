@@ -3,7 +3,7 @@ const inputUsuario = document.getElementById('username');
 const inputPassword = document.getElementById('password');
 const botonLogin = formLogin.querySelector('button[type="submit"]');
  
-// Mostrar mensaje de error // 
+// Muestra el mensaje de error // 
 let mensaje = document.getElementById('mensaje-login');
 if (!mensaje) {
     mensaje = document.createElement('p');
@@ -19,22 +19,22 @@ function mostrarMensaje(texto, esError = true) {
  
 function validar(usuario, password) {
     if (usuario.length < 3) {
-        return 'El usuario debe tener al menos 3 caracteres.';
+        return ' Usuario debe tener al menos 3 caracteres.';
     }
     if (password.length < 6) {
         return 'La contraseña debe tener al menos 6 caracteres.';
     }
-    return null; // todo correcto
+    return null; 
 }
  
 formLogin.addEventListener('submit', async (evento) => {
-    evento.preventDefault(); // evita que la página se recargue
+    evento.preventDefault(); // evita que la página se recargue //
     mostrarMensaje('');
  
     const usuario = inputUsuario.value.trim();
     const password = inputPassword.value;
  
-    // 1. Validación en el navegador
+    //  Validación en el navegador //
     const error = validar(usuario, password);
     if (error) {
         mostrarMensaje(error);
@@ -46,7 +46,7 @@ formLogin.addEventListener('submit', async (evento) => {
     botonLogin.textContent = 'Ingresando...';
  
     try {
-        // 3. Enviar los datos a login.php
+        // Datos a login.php //
         const respuesta = await fetch('login.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -60,9 +60,7 @@ formLogin.addEventListener('submit', async (evento) => {
             throw new Error('Error del servidor (' + respuesta.status + ')');
         }
  
-        // 4. Se espera que login.php responda con JSON:
-        //    { "success": true, "redirect": "inicio.html" }
-        //    { "success": false, "message": "Usuario o contraseña incorrectos" }
+        // login.php es el q interactua con JSON //
         const datos = await respuesta.json();
  
         if (datos.success) {
@@ -74,10 +72,10 @@ formLogin.addEventListener('submit', async (evento) => {
             inputPassword.focus();
         }
     } catch (err) {
-        mostrarMensaje('No se pudo iniciar sesión. Intenta de nuevo más tarde.');
+        mostrarMensaje('Inicio de Sesion Fallido. Intenta de nuevo más tarde.');
         console.error(err);
     } finally {
-        // 5. Reactivar el botón
+        // Reactivar boton //
         botonLogin.disabled = false;
         botonLogin.textContent = 'Iniciar Sesión';
     }
