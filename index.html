@@ -7,9 +7,23 @@
 </head>
 <body>
     <h1>Becool</h1>
+    <img src="c:\Users\alada\Downloads\logoBecool.jpg" alt="logo de Becool" width="150" height="150">
     <ul>
-        <li><a href="#sesión">Iniciar Sesión</a></li>
+        <li><a href="#sesion">Iniciar Sesión</a></li>
     </ul>
+       <section class="sesion" id="sesion">
+        <h2>Iniciar sesión</h2>
+        <form action="login.php" method="post">
+            <label for="username">Usuario</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Ingresa tu Contraseña</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        </label>
+        </form>
+    </section>
+
     <div class="respmenu">
         <input type="checkbox">
         <i class="fas fa-bars"></i>
@@ -18,26 +32,61 @@
             <ul>
                 <li><a href="#">Música</a></li>
                 <li><a href="#">Deportes</a></li>
-                <li><a href="#">Tecnologías</a></li>
-                <li><a href="#">Noticias</a></li>
+                <li><a href="#">Memes</a></li>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <section class="sesion" id="sesion">
-        <h2>Iniciar sesión</h2>
-        <form action="login.php" method="post">
-            <label for="username">usuario</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">contraseña</label>
-            
-            
 
-        
-        </label>
-        </form>
-    </section>
+    <button onclick="Música">
+        <h2>Música</h2>
+    </button>
+
+    <div class="music" style="display:none;">
+        <h3>Bienvenido a la comunidad de Música</h3>
+        <h3>Comparte tus vibes y descubre nuevos ritmos</h3>
+        <p>Un espacio para compartir tus canciones favoritas, <br>
+        descubrir nuevos artistas y conectar con personas que <br>
+        sientan la música igaul ue tú</p>
+    </div>
+
+     <button onclick="Deportes">
+        <h2>Deportes</h2>
+    </button>
+
+    <div class="deportes" style="display:none;">
+        <h3>Bienvenido a la comunidad de Deportes</h3>
+        <h3>Tu equipo, tus colores, tu comunidad</h3>
+        <p>Una comunidad para hablar de tus deportes y equipos favoritos, <br>
+        compartir experiencias y conectar con personas que <br>
+        sientan lo mismo que tú</p>
+    </div>
+
+    <button onclick="Memes">
+        <h2>Memes</h2>
+    </button>
+
+    <div class="memes" style="display:none;">
+        <h3>Bienvenido a la comunidad de Memes</h3>
+        <h3>Ven por un meme, quédate por un chisme</h3>
+        <p>Un lugar para compartir memes, reírte de las situaciones<br>
+        más random y encontrar personas que tenga <br>
+        el mismo sentido del humor que tú</p>
+    </div>
+
+
+
+    
+
+
+
+
+
+
+
+
+  
 
 
 
