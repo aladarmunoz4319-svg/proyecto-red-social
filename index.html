@@ -6,90 +6,74 @@
     <title>Becool</title>
 </head>
 <body>
-    <h1>Becool</h1>
-    <img src="c:\Users\alada\Downloads\logoBecool.jpg" alt="logo de Becool" width="150" height="150">
-    <ul>
-        <li><a href="#sesion">Iniciar Sesión</a></li>
-    </ul>
-       <section class="sesion" id="sesion">
-        <h2>Iniciar sesión</h2>
-        <form action="login.php" method="post">
-            <label for="username">Usuario</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Ingresa tu Contraseña</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        </label>
-        </form>
-    </section>
-
-    <div class="respmenu">
-        <input type="checkbox">
-        <i class="fas fa-bars"></i>
-        <i class="fas fa-times"></i>
+    <header>
+        <h1>Becool</h1>
+        <img src="img/logoBecool.jpg" alt="Logo de Becool" width="150" height="150">
         <nav>
             <ul>
-                <li><a href="#">Música</a></li>
-                <li><a href="#">Deportes</a></li>
-                <li><a href="#">Memes</a></li>
-                </li>
+                <li><a href="#sesion">Iniciar Sesión</a></li>
+                <li><a href="#comunidades">Comunidades</a></li>
             </ul>
         </nav>
-    </div>
+    </header>
 
+    <main>
+        <section class="sesion" id="sesion">
+            <h2>Iniciar sesión</h2>
+            <form action="login.php" method="post">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" required>
 
-    <button onclick="Música">
-        <h2>Música</h2>
-    </button>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
 
-    <div class="music" style="display:none;">
-        <h3>Bienvenido a la comunidad de Música</h3>
-        <h3>Comparte tus vibes y descubre nuevos ritmos</h3>
-        <p>Un espacio para compartir tus canciones favoritas, <br>
-        descubrir nuevos artistas y conectar con personas que <br>
-        sientan la música igaul ue tú</p>
-    </div>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </section>
 
-     <button onclick="Deportes">
-        <h2>Deportes</h2>
-    </button>
+        <section id="comunidades">
+            <h2>Comunidades</h2>
 
-    <div class="deportes" style="display:none;">
-        <h3>Bienvenido a la comunidad de Deportes</h3>
-        <h3>Tu equipo, tus colores, tu comunidad</h3>
-        <p>Una comunidad para hablar de tus deportes y equipos favoritos, <br>
-        compartir experiencias y conectar con personas que <br>
-        sientan lo mismo que tú</p>
-    </div>
+            <button type="button" data-target="music">Música</button>
+            <button type="button" data-target="deportes">Deportes</button>
+            <button type="button" data-target="memes">Memes</button>
 
-    <button onclick="Memes">
-        <h2>Memes</h2>
-    </button>
+            <div class="comunidad" id="music" hidden>
+                <h3>Bienvenido a la comunidad de Música</h3>
+                <h3>Comparte tus vibes y descubre nuevos ritmos</h3>
+                <p>Un espacio para compartir tus canciones favoritas,
+                descubrir nuevos artistas y conectar con personas que
+                sientan la música igual que tú.</p>
+            </div>
 
-    <div class="memes" style="display:none;">
-        <h3>Bienvenido a la comunidad de Memes</h3>
-        <h3>Ven por un meme, quédate por un chisme</h3>
-        <p>Un lugar para compartir memes, reírte de las situaciones<br>
-        más random y encontrar personas que tenga <br>
-        el mismo sentido del humor que tú</p>
-    </div>
+            <div class="comunidad" id="deportes" hidden>
+                <h3>Bienvenido a la comunidad de Deportes</h3>
+                <h3>Tu equipo, tus colores, tu comunidad</h3>
+                <p>Una comunidad para hablar de tus deportes y equipos favoritos,
+                compartir experiencias y conectar con personas que
+                sientan lo mismo que tú.</p>
+            </div>
 
+            <div class="comunidad" id="memes" hidden>
+                <h3>Bienvenido a la comunidad de Memes</h3>
+                <h3>Ven por un meme, quédate por un chisme</h3>
+                <p>Un lugar para compartir memes, reírte de las situaciones
+                más random y encontrar personas que tengan
+                el mismo sentido del humor que tú.</p>
+            </div>
+        </section>
+    </main>
+ <!-- Script conexion con los botones -->
+    <script>
+        const botones = document.querySelectorAll('button[data-target]');
+        const comunidades = document.querySelectorAll('.comunidad');
 
-
-    
-
-
-
-
-
-
-
-
-  
-
-
-
-
+        botones.forEach(boton => {
+            boton.addEventListener('click', () => {
+                comunidades.forEach(c => c.hidden = true);
+                document.getElementById(boton.dataset.target).hidden = false;
+            });
+        });
+    </script>
 </body>
 </html>
