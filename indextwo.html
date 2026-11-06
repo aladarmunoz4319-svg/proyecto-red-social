@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styletwo.css">;
+
+    <title>Becool</title>
+</head>
+<body>
+    <header>
+        <h1>Becool</h1>
+        <img src="c:\Users\alada\Downloads\imgen-removebg-preview.png" alt="icono-be-cool" width="200" height="200">
+    </header>
+
+    <main>
+
+        <section id="comunidades">
+            <h2>Comunidades</h2>
+
+            <button type="button" data-target="music">Música</button>
+            <button type="button" data-target="deportes">Deportes</button>
+            <button type="button" data-target="memes">Memes</button>
+
+            <div class="comunidad" id="music" hidden>
+                <h3>Bienvenido a la comunidad de Música</h3>
+                <h3>Comparte tus vibes y descubre nuevos ritmos</h3>
+                <p>Un espacio para compartir tus canciones favoritas,
+                descubrir nuevos artistas y conectar con personas que
+                sientan la música igual que tú.</p>
+                <p>Si te interesa dale click al chat y diviértete</p>
+                <a href="indexchatmusic.html" class="botonchatmusic">Chat de Música</a>
+            </div>
+
+            <div class="comunidad" id="deportes" hidden>
+                <h3>Bienvenido a la comunidad de Deportes</h3>
+                <h3>Tu equipo, tus colores, tu comunidad</h3>
+                <p>Una comunidad para hablar de tus deportes y equipos favoritos,
+                compartir experiencias y conectar con personas que
+                sientan lo mismo que tú.</p>
+                <p>Si te interesa dale click al chat y diviértete</p>
+                <a href="indexchatsport.html" class="botonchatsport">Chat de Deportes</a>
+            </div>
+
+            <div class="comunidad" id="memes" hidden>
+                <h3>Bienvenido a la comunidad de Memes</h3>
+                <h3>Ven por un meme, quédate por un chisme</h3>
+                <p>Un lugar para compartir memes, reírte de las situaciones
+                más random y encontrar personas que tengan
+                el mismo sentido del humor que tú.</p>
+                <p>Si te interesa dale click al chat y diviértete</p>
+                <a href="indexchatmemes.html" class="botonchatmemes">Chat de Memes</a>
+
+               
+            </div>
+        </section>
+    </main>
+
+    <script>
+    const botones = document.querySelectorAll('button[data-target]');
+    const comunidades = document.querySelectorAll('.comunidad');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            comunidades.forEach(c => c.hidden = true);
+            document.getElementById(boton.dataset.target).hidden = false;
+        });
+    });
+</script>
+    
+</body>
+</html>
