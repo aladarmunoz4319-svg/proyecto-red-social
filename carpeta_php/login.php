@@ -3,16 +3,16 @@ session_start();
 header("Content-Type: application/json; charset=utf-8");
 require "conexion.php";
 
-$username = trim($_POST["username"] ?? "");
+$email    = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 
-if ($username === "" || $password === "") {
+if ($email === "" || $password === "") {
     echo json_encode(["success" => false, "message" => "Completa todos los campos."]);
     exit;
 }
 
-$stmt = $conexion->prepare("SELECT id, username, password_hash, rol FROM usuarios WHERE username = ? OR email = ?");
-$stmt->bind_param("ss", $username, $username);
+$stmt = $conexion->prepare("SELECT id, username, password_hash, rol FROM usuarios WHERE email = ?");
+$stmt->bind_param("s", $email);
 $stmt->execute();
 $fila = $stmt->get_result()->fetch_assoc();
 
@@ -22,7 +22,7 @@ if (!$fila) {
 }
 
 if (!password_verify($password, $fila["password_hash"])) {
-    echo json_encode(["success" => false, "message" => "Usuario o contraseña incorrectos."]);
+    echo json_encode(["success" => false, "message" => "Correo o contraseña incorrectos."]);
     exit;
 }
 

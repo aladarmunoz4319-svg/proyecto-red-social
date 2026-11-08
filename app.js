@@ -34,7 +34,7 @@ async function enviarFormulario(url, datos) {
 const formLogin = document.getElementById('form-login');
 
 if (formLogin) {
-    const inputUsuario = document.getElementById('username');
+    const inputUsuario = document.getElementById('email');
     const inputPassword = document.getElementById('password');
     const botonLogin = formLogin.querySelector('button[type="submit"]');
     const textoBoton = botonLogin.textContent;
@@ -68,7 +68,7 @@ if (formLogin) {
 
         try {
           const datos = await enviarFormulario('carpeta_php/login.php', {
-    username: usuario,
+    email: usuario,
     password: password
 });
 
