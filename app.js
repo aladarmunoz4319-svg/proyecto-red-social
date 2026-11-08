@@ -150,7 +150,7 @@ if (formRegistro) {
     });
 }
 
-//           Comunidades 
+// AQUI MUESTRA LAS COMUNIDADES 
 const botones = document.querySelectorAll('button[data-target]');
 const comunidades = document.querySelectorAll('.comunidad');
 
@@ -160,3 +160,92 @@ botones.forEach(boton => {
         document.getElementById(boton.dataset.target).hidden = false;
     });
 });
+// TOD ESTO ES PARA LA DINAMICA DE QUE AL USUARIO "OLVIDÉ MI CONTRASEÑA"
+const formOlvide = document.getElementById('form-olvide');
+
+if (formOlvide) {
+    const botonOlvide = formOlvide.querySelector('button[type="submit"]');
+    const textoBotonOlvide = botonOlvide.textContent;
+    const mensajeOlvide = crearMensaje(formOlvide);
+
+    formOlvide.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mostrarMensaje(mensajeOlvide, '');
+
+        const email = document.getElementById('olvide-correo').value.trim();
+
+        botonOlvide.disabled = true;
+        botonOlvide.textContent = 'Enviando...';
+
+        try {
+            const datos = await enviarFormulario('carpeta_php/olvide.php', { email });
+
+            if (datos.success) {
+                mostrarMensaje(mensajeOlvide, datos.message, false);
+            } else {
+                mostrarMensaje(mensajeOlvide, datos.message || 'No se pudo procesar la solicitud.');
+            }
+        } catch (err) {
+            mostrarMensaje(mensajeOlvide, 'Algo salió mal. Intenta de nuevo más tarde.');
+            console.error(err);
+        } finally {
+            botonOlvide.disabled = false;
+            botonOlvide.textContent = textoBotonOlvide;
+        }
+    });
+}
+
+//  ESTO DE AQUI RESTABLECERA CONTRASEÑA CUANDO EL PISHI USUARIO DIGA ALV
+const formRestablecer = document.getElementById('form-restablecer');
+
+if (formRestablecer) {
+    const token = new URLSearchParams(window.location.search).get('token');
+    const botonRest = formRestablecer.querySelector('button[type="submit"]');
+    const textoBotonRest = botonRest.textContent;
+    const mensajeRest = crearMensaje(formRestablecer);
+
+    if (!token) {
+        mostrarMensaje(mensajeRest, 'Enlace no válido. Pide uno nuevo.');
+        botonRest.disabled = true;
+    }
+
+    formRestablecer.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mostrarMensaje(mensajeRest, '');
+
+        const password = document.getElementById('nueva-password').value;
+        const password2 = document.getElementById('nueva-password2').value;
+
+        if (password.length < 6) {
+            mostrarMensaje(mensajeRest, 'La contraseña debe tener al menos 6 caracteres.');
+            return;
+        }
+        if (password !== password2) {
+            mostrarMensaje(mensajeRest, 'Las contraseñas no coinciden.');
+            return;
+        }
+
+        botonRest.disabled = true;
+        botonRest.textContent = 'Guardando...';
+
+        try {
+            const datos = await enviarFormulario('carpeta_php/restablecer.php', { token, password });
+
+            if (datos.success) {
+                mostrarMensaje(mensajeRest, 'Contraseña actualizada. Te llevamos al inicio de sesión...', false);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                mostrarMensaje(mensajeRest, datos.message || 'No se pudo cambiar la contraseña.');
+                botonRest.disabled = false;
+                botonRest.textContent = textoBotonRest;
+            }
+        } catch (err) {
+            mostrarMensaje(mensajeRest, 'Algo salió mal. Intenta de nuevo más tarde.');
+            console.error(err);
+            botonRest.disabled = false;
+            botonRest.textContent = textoBotonRest;
+        }
+    });
+}
