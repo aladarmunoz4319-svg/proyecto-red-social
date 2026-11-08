@@ -1,72 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="es">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styletwo.css">
-
-    <title>Becool</title>
+    <title>Becool | Inicio</title>
 </head>
 <body>
-    <header>
-        <h1>Becool</h1>
-        <img src="c:\Users\alada\Downloads\imgen-removebg-preview.png" alt="icono-be-cool" width="200" height="200">
-    </header>
 
-    <main>
+    <!-- Esto es la  barra lateral izquierda para buscar las comimidades-->
+    <aside class="sidebar" aria-label="Menú principal">
 
-        <section id="comunidades">
-            <h2>Comunidades</h2>
+        <!-- Hace que el nombre tengo un regreso a la pagina principal -->
+        <div class="sidebar-cabecera">
+            <a href="indextwo.html" class="logo" aria-label="Ir al inicio">Be<span>cool</span></a>
+        </div>
 
-            <button type="button" data-target="music">Música</button>
-            <button type="button" data-target="deportes">Deportes</button>
-            <button type="button" data-target="memes">Memes</button>
-
-            <div class="comunidad" id="music" hidden>
-                <h3>Bienvenido a la comunidad de Música</h3>
-                <h3>Comparte tus vibes y descubre nuevos ritmos</h3>
-                <p>Un espacio para compartir tus canciones favoritas,
-                descubrir nuevos artistas y conectar con personas que
-                sientan la música igual que tú.</p>
-                <p>Si te interesa dale click al chat y diviértete</p>
-                <a href="indexchatmusic.html" class="botonchatmusic">Chat de Música</a>
+        <!-- Es mi tarejta de avatar -->
+        <a href="#" class="menu-usuario">
+            <div class="avatar">A</div>
+            <div>
+                <strong>Aladar</strong>
+                <small>Ver perfil</small>
             </div>
+        </a>
 
-            <div class="comunidad" id="deportes" hidden>
-                <h3>Bienvenido a la comunidad de Deportes</h3>
-                <h3>Tu equipo, tus colores, tu comunidad</h3>
-                <p>Una comunidad para hablar de tus deportes y equipos favoritos,
-                compartir experiencias y conectar con personas que
-                sientan lo mismo que tú.</p>
-                <p>Si te interesa dale click al chat y diviértete</p>
-                <a href="indexchatsport.html" class="botonchatsport">Chat de Deportes</a>
-            </div>
+        <!-- parte del menu lateral izquierdo -->
+        <nav class="sidebar-nav">
+            <a href="indextwo.html" class="menu-link activo">🏠 Inicio</a>
+            <a href="#" class="menu-link">👤 Mi perfil</a>
+            <a href="#" class="menu-link">⚙️ Configuración</a>
+        </nav>
 
-            <div class="comunidad" id="memes" hidden>
-                <h3>Bienvenido a la comunidad de Memes</h3>
-                <h3>Ven por un meme, quédate por un chisme</h3>
-                <p>Un lugar para compartir memes, reírte de las situaciones
-                más random y encontrar personas que tengan
-                el mismo sentido del humor que tú.</p>
-                <p>Si te interesa dale click al chat y diviértete</p>
-                <a href="indexchatmemes.html" class="botonchatmemes">Chat de Memes</a>
+        <!-- Lista de los chats_uno por comunidad -->
+        <div class="chats">
+            <p class="menu-titulo">Chats</p>
 
-               
-            </div>
-        </section>
-    </main>
+            <!-- Cada chat tiene ícono mas su nombre con último mensaje mas globito de mensajes nuevos -->
+            <a href="indexchatmusic.html" class="chat">
+                <div class="chat-icono">🎵</div>
+                <div class="chat-info">
+                    <strong>Música</strong>
+                    <small>Aladar: probando</small>
+                </div>
+                <span class="chat-badge">3</span>
+            </a>
 
-    <script>
-    const botones = document.querySelectorAll('button[data-target]');
-    const comunidades = document.querySelectorAll('.comunidad');
+            <a href="indexchatsport.html" class="chat">
+                <div class="chat-icono">⚽</div>
+                <div class="chat-info">
+                    <strong>Deportes</strong>
+                    <small>probando</small>
+                </div>
+            </a>
 
-    botones.forEach(boton => {
-        boton.addEventListener('click', () => {
-            comunidades.forEach(c => c.hidden = true);
-            document.getElementById(boton.dataset.target).hidden = false;
-        });
-    });
-</script>
-    
+            <a href="indexchatmemes.html" class="chat">
+                <div class="chat-icono">😂</div>
+                <div class="chat-info">
+                    <strong>Memes</strong>
+                    <small>probando</small>
+                </div>
+                <span class="chat-badge">1</span>
+            </a>
+        </div>
+
+        <!-- Botón de cerrar sesión hace un logout.php que destruye la sesión y manda al login -->
+        <a href="carpeta_php/logout.php" class="menu-link salir">🚪 Cerrar sesión</a>
+    </aside>
+
+    <!-- todo lo que esta a la derecha es el contenido de cada opccion -->
+    <div class="contenido">
+
+        <!--  buscador -->
+        <header class="topbar">
+            <input type="search" class="buscador" placeholder="Buscar comunidades o personas...">
+        </header>
+
+        <!-- publicaciones y sugerencias -->
+        <main class="layout">
+            <section class="feed">
+                <form class="nueva-publicacion">
+                    <textarea placeholder="¿Qué quieres compartir hoy?" rows="3"></textarea>
+                    <button type="submit">Publicar</button>
+                </form>
+                <article class="publicacion">
+                    <div class="autor">
+                        <div class="avatar">A</div>
+                        <div>
+                            <strong>Aladar</strong>
+                            <small>en Música · hace 5 min</small>
+                        </div>
+                    </div>
+                    <p>Primera publicación de prueba en Becool</p>
+                    <div class="acciones">
+                        <button>❤️ 12</button>
+                        <button>💬 3</button>
+                    </div>
+                </article>
+
+                <article class="publicacion">
+                    <div class="autor">
+                        <div class="avatar">M</div>
+                        <div>
+                            <strong>Maurix</strong>
+                            <small>en Memes · hace 1 h</small>
+                        </div>
+                    </div>
+                    <p>Cuando por fin te funciona el login después de dos días 5 monsters y 10 tacos de suaperro</p>
+                    <div class="acciones">
+                        <button>❤️ 48</button>
+                        <button>💬 9</button>
+                    </div>
+                </article>
+            </section>
+            <aside class="derecha">
+                <h2>Sugerido para ti</h2>
+                <ul class="sugerencias">
+                    <li><a href="indexchatmusic.html">Canal: Música</a></li>
+                    <li><a href="indexchatsport.html">Canal: Deportes</a></li>
+                    <li><a href="indexchatmemes.html">Canal: Memes</a></li>
+                </ul>
+            </aside>
+        </main>
+    </div>
 </body>
 </html>

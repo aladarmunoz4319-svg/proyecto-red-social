@@ -249,3 +249,33 @@ if (formRestablecer) {
         }
     });
 }
+// Esta funcion abre el menu lateral de la pagina en cualquier tipo de pantalla retratil z flip
+const menuLateral = document.getElementById('menu-lateral');
+
+if (menuLateral) {
+    const btnMenu = document.getElementById('btn-menu');
+    const fondoMenu = document.getElementById('fondo-menu');
+    const btnCerrarMenu = document.getElementById('cerrar-menu');
+
+    const abrirMenu = () => {
+        menuLateral.classList.add('abierto');
+        fondoMenu.classList.add('visible');
+        btnMenu.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const cerrarMenu = () => {
+        menuLateral.classList.remove('abierto');
+        fondoMenu.classList.remove('visible');
+        btnMenu.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    };
+
+    btnMenu.addEventListener('click', abrirMenu);
+    btnCerrarMenu.addEventListener('click', cerrarMenu);
+    fondoMenu.addEventListener('click', cerrarMenu);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarMenu();
+    });
+}
