@@ -30,4 +30,4 @@ $_SESSION["usuario_id"] = $fila["id"];
 $_SESSION["username"]   = $fila["username"];
 $_SESSION["rol"]        = $fila["rol"];
 
-echo json_encode(["success" => true, "redirect" => "indextwo.html"]);
+echo json_encode(["success" => true, "redirect" => "indextwo.html"]);x

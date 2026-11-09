@@ -30,7 +30,7 @@ async function enviarFormulario(url, datos) {
     return respuesta.json();
 }
 
-//           LOGIN 
+//  LOGIN 
 const formLogin = document.getElementById('form-login');
 
 if (formLogin) {
@@ -96,7 +96,7 @@ if (formLogin) {
     });
 }
 
-//       REGISTRO 
+//   ESTO ES   MI    REGISTRO 
 const formRegistro = document.getElementById('form-registro');
 
 if (formRegistro) {
