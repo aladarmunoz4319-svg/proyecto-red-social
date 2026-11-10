@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatSport</title>
+</head>
+<body>
+     <section class="chat">
+    <header class="chat__header">
+        <button class="button chat__close" aria-label="Cerrar"></button>
+        <h2 class="chat__name">Bienvenido al chat de Deportes</h2>
+        <p class="chat__status"></p>
+    </header>
+    <!-- Contenedor de mensajes -->
+    <div class="chat__messages" aria-live="polite">
+        <!-- Componente de mensaje receptor -->
+        <article class="message message--receptor">
+            <h3 class="message__username"></h3>
+            <p class="message__text"></p>
+        </article>
+        <!-- Componente de mensaje emisor -->
+        <article class="message message--emisor">
+            <h3 class="message__username"></h3>
+            <p class="message__text"></p>
+        </article>
+    </div>
+    <footer class="chat__footer">
+        <form class="chat__form">
+            <!-- Input que crece con el texto -->
+            <div
+                role="textbox"
+                aria-label="Nuevo mensaje"
+                aria-placeholder="Escribe tu mensaje..."
+                contenteditable="true"
+                class="chat__input"
+                name="mensaje">
+            </div>
+             <button type="submit">Enviar</button>
+        </form>
+    </footer>
+</section>
+    
+</body>
+</html>

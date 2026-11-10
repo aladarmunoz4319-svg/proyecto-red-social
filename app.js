@@ -1,0 +1,281 @@
+const PAGINA_INICIO = 'inicio.html';
+
+// Utilidades 
+function crearMensaje(form) {
+    let mensaje = form.querySelector('.mensaje-form');
+    if (!mensaje) {
+        mensaje = document.createElement('p');
+        mensaje.className = 'mensaje-form';
+        mensaje.setAttribute('role', 'alert');
+        form.appendChild(mensaje);
+    }
+    return mensaje;
+}
+
+function mostrarMensaje(mensaje, texto, esError = true) {
+    mensaje.textContent = texto;
+    mensaje.style.color = esError ? 'crimson' : 'lightgreen';
+}
+
+async function enviarFormulario(url, datos) {
+    const respuesta = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(datos)
+    });
+
+    if (!respuesta.ok) {
+        throw new Error('Error del servidor (' + respuesta.status + ')');
+    }
+    return respuesta.json();
+}
+
+//  LOGIN 
+const formLogin = document.getElementById('form-login');
+
+if (formLogin) {
+    const inputUsuario = document.getElementById('email');
+    const inputPassword = document.getElementById('password');
+    const botonLogin = formLogin.querySelector('button[type="submit"]');
+    const textoBoton = botonLogin.textContent;
+    const mensajeLogin = crearMensaje(formLogin);
+
+    function validarLogin(usuario, password) {
+        if (usuario.length < 3) {
+            return 'El usuario debe tener al menos 3 caracteres.';
+        }
+        if (password.length < 6) {
+            return 'La contraseña debe tener al menos 6 caracteres.';
+        }
+        return null;
+    }
+
+    formLogin.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mostrarMensaje(mensajeLogin, '');
+
+        const usuario = inputUsuario.value.trim();
+        const password = inputPassword.value;
+
+        const error = validarLogin(usuario, password);
+        if (error) {
+            mostrarMensaje(mensajeLogin, error);
+            return;
+        }
+
+        botonLogin.disabled = true;
+        botonLogin.textContent = 'Ingresando...';
+
+        try {
+          const datos = await enviarFormulario('carpeta_php/login.php', {
+    email: usuario,
+    password: password
+});
+
+            if (datos.success) {
+                mostrarMensaje(mensajeLogin, '¡Bienvenido!', false);
+                window.location.href = datos.redirect || PAGINA_INICIO;
+            } else if (datos.noExiste) {
+                // si laa cuenta no existe lo mandamos a registrarse
+                mostrarMensaje(mensajeLogin, 'No existe esa cuenta. Te llevamos al registro...');
+                setTimeout(() => {
+                    window.location.href = 'registro.html';
+                }, 1500);
+            } else {
+                mostrarMensaje(mensajeLogin, datos.message || 'Usuario o contraseña incorrectos.');
+                inputPassword.value = '';
+                inputPassword.focus();
+            }
+        } catch (err) {
+            mostrarMensaje(mensajeLogin, 'Inicio de sesión fallido. Intenta de nuevo más tarde.');
+            console.error(err);
+        } finally {
+            botonLogin.disabled = false;
+            botonLogin.textContent = textoBoton;
+        }
+    });
+}
+
+//   ESTO ES   MI    REGISTRO 
+const formRegistro = document.getElementById('form-registro');
+
+if (formRegistro) {
+    const botonRegistro = formRegistro.querySelector('button[type="submit"]');
+    const textoBotonReg = botonRegistro.textContent;
+    const mensajeRegistro = crearMensaje(formRegistro);
+
+    formRegistro.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mostrarMensaje(mensajeRegistro, '');
+
+        const username = document.getElementById('reg-usuario').value.trim();
+        const email = document.getElementById('reg-correo').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const password2 = document.getElementById('reg-password2').value;
+
+        if (username.length < 3 || username.length > 30) {
+            mostrarMensaje(mensajeRegistro, 'El usuario debe tener entre 3 y 30 caracteres.');
+            return;
+        }
+        if (password.length < 6) {
+            mostrarMensaje(mensajeRegistro, 'La contraseña debe tener al menos 6 caracteres.');
+            return;
+        }
+        if (password !== password2) {
+            mostrarMensaje(mensajeRegistro, 'Las contraseñas no coinciden.');
+            return;
+        }
+
+        botonRegistro.disabled = true;
+        botonRegistro.textContent = 'Creando cuenta...';
+
+        try {
+            const datos = await enviarFormulario('carpeta_php/registro.php', { username, email, password });
+
+            if (datos.success) {
+                mostrarMensaje(mensajeRegistro, 'Cuenta creada. Ya puedes iniciar sesión.', false);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                mostrarMensaje(mensajeRegistro, datos.message || 'No se pudo crear la cuenta.');
+            }
+        } catch (err) {
+            mostrarMensaje(mensajeRegistro, 'No se pudo registrar. Intenta de nuevo más tarde.');
+            console.error(err);
+        } finally {
+            botonRegistro.disabled = false;
+            botonRegistro.textContent = textoBotonReg;
+        }
+    });
+}
+
+// AQUI MUESTRA LAS COMUNIDADES 
+const botones = document.querySelectorAll('button[data-target]');
+const comunidades = document.querySelectorAll('.comunidad');
+
+botones.forEach(boton => {
+    boton.addEventListener('click', () => {
+        comunidades.forEach(c => c.hidden = true);
+        document.getElementById(boton.dataset.target).hidden = false;
+    });
+});
+// TOD ESTO ES PARA LA DINAMICA DE QUE AL USUARIO "OLVIDÉ MI CONTRASEÑA"
+const formOlvide = document.getElementById('form-olvide');
+
+if (formOlvide) {
+    const botonOlvide = formOlvide.querySelector('button[type="submit"]');
+    const textoBotonOlvide = botonOlvide.textContent;
+    const mensajeOlvide = crearMensaje(formOlvide);
+
+    formOlvide.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mostrarMensaje(mensajeOlvide, '');
+
+        const email = document.getElementById('olvide-correo').value.trim();
+
+        botonOlvide.disabled = true;
+        botonOlvide.textContent = 'Enviando...';
+
+        try {
+            const datos = await enviarFormulario('carpeta_php/olvide.php', { email });
+
+            if (datos.success) {
+                mostrarMensaje(mensajeOlvide, datos.message, false);
+            } else {
+                mostrarMensaje(mensajeOlvide, datos.message || 'No se pudo procesar la solicitud.');
+            }
+        } catch (err) {
+            mostrarMensaje(mensajeOlvide, 'Algo salió mal. Intenta de nuevo más tarde.');
+            console.error(err);
+        } finally {
+            botonOlvide.disabled = false;
+            botonOlvide.textContent = textoBotonOlvide;
+        }
+    });
+}
+
+//  ESTO DE AQUI RESTABLECERA CONTRASEÑA CUANDO EL PISHI USUARIO DIGA ALV
+const formRestablecer = document.getElementById('form-restablecer');
+
+if (formRestablecer) {
+    const token = new URLSearchParams(window.location.search).get('token');
+    const botonRest = formRestablecer.querySelector('button[type="submit"]');
+    const textoBotonRest = botonRest.textContent;
+    const mensajeRest = crearMensaje(formRestablecer);
+
+    if (!token) {
+        mostrarMensaje(mensajeRest, 'Enlace no válido. Pide uno nuevo.');
+        botonRest.disabled = true;
+    }
+
+    formRestablecer.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mostrarMensaje(mensajeRest, '');
+
+        const password = document.getElementById('nueva-password').value;
+        const password2 = document.getElementById('nueva-password2').value;
+
+        if (password.length < 6) {
+            mostrarMensaje(mensajeRest, 'La contraseña debe tener al menos 6 caracteres.');
+            return;
+        }
+        if (password !== password2) {
+            mostrarMensaje(mensajeRest, 'Las contraseñas no coinciden.');
+            return;
+        }
+
+        botonRest.disabled = true;
+        botonRest.textContent = 'Guardando...';
+
+        try {
+            const datos = await enviarFormulario('carpeta_php/restablecer.php', { token, password });
+
+            if (datos.success) {
+                mostrarMensaje(mensajeRest, 'Contraseña actualizada. Te llevamos al inicio de sesión...', false);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                mostrarMensaje(mensajeRest, datos.message || 'No se pudo cambiar la contraseña.');
+                botonRest.disabled = false;
+                botonRest.textContent = textoBotonRest;
+            }
+        } catch (err) {
+            mostrarMensaje(mensajeRest, 'Algo salió mal. Intenta de nuevo más tarde.');
+            console.error(err);
+            botonRest.disabled = false;
+            botonRest.textContent = textoBotonRest;
+        }
+    });
+}
+// Esta funcion abre el menu lateral de la pagina en cualquier tipo de pantalla retratil z flip
+const menuLateral = document.getElementById('menu-lateral');
+
+if (menuLateral) {
+    const btnMenu = document.getElementById('btn-menu');
+    const fondoMenu = document.getElementById('fondo-menu');
+    const btnCerrarMenu = document.getElementById('cerrar-menu');
+
+    const abrirMenu = () => {
+        menuLateral.classList.add('abierto');
+        fondoMenu.classList.add('visible');
+        btnMenu.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const cerrarMenu = () => {
+        menuLateral.classList.remove('abierto');
+        fondoMenu.classList.remove('visible');
+        btnMenu.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    };
+
+    btnMenu.addEventListener('click', abrirMenu);
+    btnCerrarMenu.addEventListener('click', cerrarMenu);
+    fondoMenu.addEventListener('click', cerrarMenu);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarMenu();
+    });
+}

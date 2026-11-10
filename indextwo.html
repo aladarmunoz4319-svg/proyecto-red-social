@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styletwo.css">
+    <title>Becool | Inicio</title>
+</head>
+<body>
+
+    <!-- TODO ESTO ES UNA PRUEBA DE COMO QUEDARA FUNCIOANNDO TODO EL HOME DE LA PAGINA ACLARO Q PUEDE ESTA DISPUESTO A CMABIOS O FUNCIONES ESPECIFICAS DE ESTA, SIN EMBARGO DEBE MANTENER ESA IDEA  -->
+
+    <!-- Esto es la  barra lateral izquierda para buscar las comimidades-->
+    <aside class="sidebar" aria-label="Menú principal">
+
+        <!-- Hace que el nombre tengo un regreso a la pagina principal -->
+        <div class="sidebar-cabecera">
+            <a href="indextwo.html" class="logo" aria-label="Ir al inicio">Be<span>cool</span></a>
+        </div>
+
+        <!-- Es mi tarejta de avatar -->
+        <a href="#" class="menu-usuario">
+            <div class="avatar">A</div>
+            <div>
+                <strong>Aladar</strong>
+                <small>Ver perfil</small>
+            </div>
+        </a>
+
+        <!-- parte del menu lateral izquierdo -->
+        <nav class="sidebar-nav">
+            <a href="indextwo.html" class="menu-link activo">🏠 Inicio</a>
+            <a href="#" class="menu-link">👤 Mi perfil</a>
+            <a href="#" class="menu-link">⚙️ Configuración</a>
+        </nav>
+
+        <!-- Lista de los chats_uno por comunidad -->
+        <div class="chats">
+            <p class="menu-titulo">Chats</p>
+
+            <!-- Cada chat tiene ícono mas su nombre con último mensaje mas globito de mensajes nuevos -->
+            <a href="indexchatmusic.html" class="chat">
+                <div class="chat-icono">🎵</div>
+                <div class="chat-info">
+                    <strong>Música</strong>
+                    <small>Aladar: probando</small>
+                </div>
+                <span class="chat-badge">3</span>
+            </a>
+
+            <a href="indexchatsport.html" class="chat">
+                <div class="chat-icono">⚽</div>
+                <div class="chat-info">
+                    <strong>Deportes</strong>
+                    <small>probando</small>
+                </div>
+            </a>
+
+            <a href="indexchatmemes.html" class="chat">
+                <div class="chat-icono">😂</div>
+                <div class="chat-info">
+                    <strong>Memes</strong>
+                    <small>probando</small>
+                </div>
+                <span class="chat-badge">1</span>
+            </a>
+        </div>
+
+        <!-- Botón de cerrar sesión hace un logout.php que destruye la sesión y manda al login -->
+        <a href="carpeta_php/logout.php" class="menu-link salir">🚪 Cerrar sesión</a>
+    </aside>
+
+    <!-- todo lo que esta a la derecha es el contenido de cada opccion -->
+    <div class="contenido">
+
+        <!--  buscador -->
+        <header class="topbar">
+            <input type="search" class="buscador" placeholder="Buscar comunidades o personas...">
+        </header>
+
+        <!-- publicaciones y sugerencias -->
+        <main class="layout">
+            <section class="feed">
+                <form class="nueva-publicacion">
+                    <textarea placeholder="¿Qué quieres compartir hoy?" rows="3"></textarea>
+                    <button type="submit">Publicar</button>
+                </form>
+
+                <!-- prueba de como se veran las publicaciones ya hechas y funcionando -->
+                <article class="publicacion">
+                    <div class="autor">
+                        <div class="avatar">A</div>
+                        <div>
+                            <strong>Aladar</strong>
+                            <small>en Música · hace 5 min</small>
+                        </div>
+                    </div>
+                    <!-- LOS EMOJIS SON IMPORTS DE ICONSAPPPLE -->
+                    <p>Primera publicación de prueba en Becool</p>
+                    <div class="acciones">
+                        <button>❤️ </button>
+                        <button>💬 </button>
+                    </div>
+                </article>
+<!-- prueba de como se veran las publicaciones ya hechas y funcionando -->
+                <article class="publicacion">
+                    <div class="autor">
+                        <div class="avatar">M</div>
+                        <div>
+                            <strong>Maurix</strong>
+                            <small>en Memes · hace 1 h</small>
+                        </div>
+                    </div>
+                    <p>Cuando por fin te funciona el login después de dos días 5 monsters y 10 tacos de suaperro</p>
+                    <div class="acciones">
+                        <button>❤️ </button>
+                        <button>💬 </button>
+                    </div>
+                </article>
+                <!-- prueba de como se veran las sugerencias ya funcioanando -->
+            </section>
+            <aside class="derecha">
+                <h2>Sugerido para ti</h2>
+                <ul class="sugerencias">
+                    <li><a href="indexchatmusic.html">Canal: Música</a></li>
+                    <li><a href="indexchatsport.html">Canal: Deportes</a></li>
+                    <li><a href="indexchatmemes.html">Canal: Memes</a></li>
+                </ul>
+            </aside>
+        </main>
+    </div>
+</body>
+</html>
