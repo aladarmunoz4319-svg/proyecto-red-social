@@ -1,133 +1,259 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styletwo.css">
     <title>Becool | Inicio</title>
+
+    <!-- Estilos de esta página -->
+    <link rel="stylesheet" href="css/styletwo.css">
+
+    <!-- GSAP (gratis, incluye todos sus plugins) y ScrollTrigger: animaciones al bajar -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Nuestro JS: va en el head para que no haya parpadeo al cargar -->
+    <script src="inicio.js"></script>
 </head>
 <body>
 
-    <!-- TODO ESTO ES UNA PRUEBA DE COMO QUEDARA FUNCIOANNDO TODO EL HOME DE LA PAGINA ACLARO Q PUEDE ESTA DISPUESTO A CMABIOS O FUNCIONES ESPECIFICAS DE ESTA, SIN EMBARGO DEBE MANTENER ESA IDEA  -->
+    <!-- Íconos: se definen una sola vez y se reutilizan con <use href="#nombre"> -->
+    <svg class="sprite" aria-hidden="true">
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H5v16h4"/><path d="m16 8 4 4-4 4"/><path d="M20 12H9"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+        <symbol id="i-comment" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+        <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/></symbol>
+        <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 8 3.5 2.5-1.3 4.1H9.8l-1.3-4.1z"/></symbol>
+        <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14c1 1.5 2.3 2 3.5 2s2.5-.5 3.5-2"/><path d="M9 9.5h.01M15 9.5h.01"/></symbol>
+    </svg>
 
-    <!-- Esto es la  barra lateral izquierda para buscar las comimidades-->
+    <!-- ============ BARRA LATERAL: fija, una sola superficie ============ -->
     <aside class="sidebar" aria-label="Menú principal">
 
-        <!-- Hace que el nombre tengo un regreso a la pagina principal -->
-        <div class="sidebar-cabecera">
-            <a href="indextwo.html" class="logo" aria-label="Ir al inicio">Be<span>cool</span></a>
-        </div>
+        <!-- El logo es un link: regresa a la página principal -->
+        <a href="indextwo.html" class="logo" aria-label="Becool, ir al inicio">Be<span>cool</span></a>
 
-        <!-- Es mi tarejta de avatar -->
-        <a href="#" class="menu-usuario">
-            <div class="avatar">A</div>
-            <div>
+        <a href="#" class="perfil reveal-x">
+            <span class="avatar">A</span>
+            <span>
                 <strong>Aladar</strong>
                 <small>Ver perfil</small>
-            </div>
+            </span>
         </a>
 
-        <!-- parte del menu lateral izquierdo -->
-        <nav class="sidebar-nav">
-            <a href="indextwo.html" class="menu-link activo">🏠 Inicio</a>
-            <a href="#" class="menu-link">👤 Mi perfil</a>
-            <a href="#" class="menu-link">⚙️ Configuración</a>
+        <nav class="nav" aria-label="Secciones">
+            <a href="indextwo.html" class="nav-link reveal-x" aria-current="page">
+                <svg class="icono"><use href="#i-home"/></svg>Inicio
+            </a>
+            <a href="#" class="nav-link reveal-x">
+                <svg class="icono"><use href="#i-user"/></svg>Mi perfil
+            </a>
+            <a href="#" class="nav-link reveal-x">
+                <svg class="icono"><use href="#i-sliders"/></svg>Configuración
+            </a>
         </nav>
 
-        <!-- Lista de los chats_uno por comunidad -->
         <div class="chats">
-            <p class="menu-titulo">Chats</p>
+            <p class="etiqueta reveal-x">Chats</p>
 
-            <!-- Cada chat tiene ícono mas su nombre con último mensaje mas globito de mensajes nuevos -->
-            <a href="indexchatmusic.html" class="chat">
-                <div class="chat-icono">🎵</div>
-                <div class="chat-info">
+            <a href="indexchatmusic.html" class="chat reveal-x">
+                <span class="chat-icono"><svg class="icono"><use href="#i-music"/></svg></span>
+                <span class="chat-info">
                     <strong>Música</strong>
                     <small>Aladar: probando</small>
-                </div>
+                </span>
                 <span class="chat-badge">3</span>
             </a>
 
-            <a href="indexchatsport.html" class="chat">
-                <div class="chat-icono">⚽</div>
-                <div class="chat-info">
+            <a href="indexchatsport.html" class="chat reveal-x">
+                <span class="chat-icono"><svg class="icono"><use href="#i-ball"/></svg></span>
+                <span class="chat-info">
                     <strong>Deportes</strong>
                     <small>probando</small>
-                </div>
+                </span>
             </a>
 
-            <a href="indexchatmemes.html" class="chat">
-                <div class="chat-icono">😂</div>
-                <div class="chat-info">
+            <a href="indexchatmemes.html" class="chat reveal-x">
+                <span class="chat-icono"><svg class="icono"><use href="#i-smile"/></svg></span>
+                <span class="chat-info">
                     <strong>Memes</strong>
                     <small>probando</small>
-                </div>
+                </span>
                 <span class="chat-badge">1</span>
             </a>
         </div>
 
-        <!-- Botón de cerrar sesión hace un logout.php que destruye la sesión y manda al login -->
-        <a href="carpeta_php/logout.php" class="menu-link salir">🚪 Cerrar sesión</a>
+        <a href="carpeta_php/logout.php" class="nav-link salir reveal-x">
+            <svg class="icono"><use href="#i-logout"/></svg>Cerrar sesión
+        </a>
     </aside>
 
-    <!-- todo lo que esta a la derecha es el contenido de cada opccion -->
+    <!-- ============ CONTENIDO ============ -->
     <div class="contenido">
 
-        <!--  buscador -->
         <header class="topbar">
-            <input type="search" class="buscador" placeholder="Buscar comunidades o personas...">
+            <label class="buscador">
+                <svg class="icono"><use href="#i-search"/></svg>
+                <input type="search" placeholder="Buscar comunidades o personas" aria-label="Buscar">
+                <kbd>/</kbd>
+            </label>
         </header>
 
-        <!-- publicaciones y sugerencias -->
         <main class="layout">
+
+            <!-- Columna principal -->
             <section class="feed">
-                <form class="nueva-publicacion">
-                    <textarea placeholder="¿Qué quieres compartir hoy?" rows="3"></textarea>
-                    <button type="submit">Publicar</button>
+
+                <header class="hero">
+                    <h1 class="hero-titulo reveal-text">Hola, <span class="acento">Aladar</span></h1>
+                    <p class="hero-sub reveal-text">Esto es lo nuevo en tus comunidades.</p>
+                </header>
+
+                <!-- Filtro con "pastilla" que se desliza -->
+                <div class="tabs" role="group" aria-label="Filtrar publicaciones">
+                    <span class="tabs-pill" aria-hidden="true"></span>
+                    <button type="button" class="tab" data-filtro="todo" aria-pressed="true">Para ti</button>
+                    <button type="button" class="tab" data-filtro="musica" aria-pressed="false">Música</button>
+                    <button type="button" class="tab" data-filtro="deportes" aria-pressed="false">Deportes</button>
+                    <button type="button" class="tab" data-filtro="memes" aria-pressed="false">Memes</button>
+                </div>
+
+                <!-- Nueva publicación: área abierta, sin caja -->
+                <form class="composer reveal">
+                    <span class="avatar">A</span>
+                    <textarea placeholder="¿Qué quieres compartir hoy?" rows="2" aria-label="Escribe tu publicación"></textarea>
+                    <button type="submit" class="btn-publicar">Publicar</button>
                 </form>
 
-                <!-- prueba de como se veran las publicaciones ya hechas y funcionando -->
-                <article class="publicacion">
-                    <div class="autor">
-                        <div class="avatar">A</div>
-                        <div>
-                            <strong>Aladar</strong>
-                            <small>en Música · hace 5 min</small>
+                <!-- Publicaciones: filas abiertas separadas por una línea fina -->
+                <article class="post reveal" data-comunidad="musica">
+                    <span class="avatar">A</span>
+                    <div class="post-cuerpo">
+                        <div class="post-cab"><strong>Aladar</strong><span>en Música · hace 5 min</span></div>
+                        <p>Primera publicación de prueba en Becool. Si ves esto, el login, la base de datos y el correo ya funcionan.</p>
+                        <div class="post-acciones">
+                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
+                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">12</span>
+                            </button>
+                            <button type="button" class="accion" aria-label="Comentarios">
+                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">3</span>
+                            </button>
                         </div>
                     </div>
-                    <!-- LOS EMOJIS SON IMPORTS DE ICONSAPPPLE -->
-                    <p>Primera publicación de prueba en Becool</p>
-                    <div class="acciones">
-                        <button>❤️ </button>
-                        <button>💬 </button>
-                    </div>
                 </article>
-<!-- prueba de como se veran las publicaciones ya hechas y funcionando -->
-                <article class="publicacion">
-                    <div class="autor">
-                        <div class="avatar">M</div>
-                        <div>
-                            <strong>Maurix</strong>
-                            <small>en Memes · hace 1 h</small>
+
+                <article class="post reveal" data-comunidad="memes">
+                    <span class="avatar">M</span>
+                    <div class="post-cuerpo">
+                        <div class="post-cab"><strong>Maurix</strong><span>en Memes · hace 1 h</span></div>
+                        <p>Cuando por fin te funciona el login después de dos días de pelearte con la ruta del CSS.</p>
+                        <div class="post-acciones">
+                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
+                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">48</span>
+                            </button>
+                            <button type="button" class="accion" aria-label="Comentarios">
+                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">9</span>
+                            </button>
                         </div>
                     </div>
-                    <p>Cuando por fin te funciona el login después de dos días 5 monsters y 10 tacos de suaperro</p>
-                    <div class="acciones">
-                        <button>❤️ </button>
-                        <button>💬 </button>
+                </article>
+
+                <article class="post reveal" data-comunidad="deportes">
+                    <span class="avatar">A</span>
+                    <div class="post-cuerpo">
+                        <div class="post-cab"><strong>Ana</strong><span>en Deportes · hace 2 h</span></div>
+                        <p>Qué partidazo el de anoche. Ese gol en el último minuto todavía me tiene sin palabras.</p>
+                        <div class="post-acciones">
+                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
+                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">31</span>
+                            </button>
+                            <button type="button" class="accion" aria-label="Comentarios">
+                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">14</span>
+                            </button>
+                        </div>
                     </div>
                 </article>
-                <!-- prueba de como se veran las sugerencias ya funcioanando -->
+
+                <article class="post reveal" data-comunidad="musica">
+                    <span class="avatar">L</span>
+                    <div class="post-cuerpo">
+                        <div class="post-cab"><strong>Luis</strong><span>en Música · hace 3 h</span></div>
+                        <p>Recomiéndenme discos para estudiar. Que no tengan letra, porque me distraigo cantando.</p>
+                        <div class="post-acciones">
+                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
+                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">22</span>
+                            </button>
+                            <button type="button" class="accion" aria-label="Comentarios">
+                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">27</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post reveal" data-comunidad="memes">
+                    <span class="avatar">S</span>
+                    <div class="post-cuerpo">
+                        <div class="post-cab"><strong>Sofía</strong><span>en Memes · hace 5 h</span></div>
+                        <p>Mi cara cuando el código dice "Not Found" y el archivo está justo ahí, en otra carpeta.</p>
+                        <div class="post-acciones">
+                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
+                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">67</span>
+                            </button>
+                            <button type="button" class="accion" aria-label="Comentarios">
+                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">11</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post reveal" data-comunidad="deportes">
+                    <span class="avatar">D</span>
+                    <div class="post-cuerpo">
+                        <div class="post-cab"><strong>Diego</strong><span>en Deportes · ayer</span></div>
+                        <p>¿Quién se apunta a armar un torneo de fútbol rápido el fin de semana? Ya tengo la cancha.</p>
+                        <div class="post-acciones">
+                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
+                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">18</span>
+                            </button>
+                            <button type="button" class="accion" aria-label="Comentarios">
+                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">35</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
             </section>
-            <aside class="derecha">
-                <h2>Sugerido para ti</h2>
-                <ul class="sugerencias">
-                    <li><a href="indexchatmusic.html">Canal: Música</a></li>
-                    <li><a href="indexchatsport.html">Canal: Deportes</a></li>
-                    <li><a href="indexchatmemes.html">Canal: Memes</a></li>
-                </ul>
+
+            <!-- Columna derecha: sugerencias, sin caja -->
+            <aside class="derecha reveal">
+                <p class="etiqueta">Sugerido para ti</p>
+
+                <a href="indexchatmusic.html" class="chat">
+                    <span class="chat-icono"><svg class="icono"><use href="#i-music"/></svg></span>
+                    <span class="chat-info">
+                        <strong>Música</strong>
+                        <small>1,240 miembros</small>
+                    </span>
+                </a>
+
+                <a href="indexchatsport.html" class="chat">
+                    <span class="chat-icono"><svg class="icono"><use href="#i-ball"/></svg></span>
+                    <span class="chat-info">
+                        <strong>Deportes</strong>
+                        <small>860 miembros</small>
+                    </span>
+                </a>
+
+                <a href="indexchatmemes.html" class="chat">
+                    <span class="chat-icono"><svg class="icono"><use href="#i-smile"/></svg></span>
+                    <span class="chat-info">
+                        <strong>Memes</strong>
+                        <small>2,310 miembros</small>
+                    </span>
+                </a>
             </aside>
         </main>
     </div>

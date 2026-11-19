@@ -1,27 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    --fondo: #1f3a1a;
-    --oscuro: #162b12;
-    --tarjeta: #2b4a24;
-    --borde: rgba(255, 255, 255, .12);
-    --lima: #b4e41f;
+    /* Colores (mismo verde y lima del login) */
+    --bg: #13240e;
+    --sidebar: #0f1c0a;
     --texto: #f2f7ea;
-    --texto-suave: #b9c9ad;
-    --ancho-lateral: 290px;
+    --suave: #a7b99b;
+    --lima: #b4e41f;
+    --lima-tinte: rgba(180, 228, 31, .14);
+    --sobre-lima: #12220c;
+    --hover: rgba(255, 255, 255, .045);
+    --linea: rgba(255, 255, 255, .08);
+
+    --ancho-lateral: 280px;
+
+    /* Tokens de movimiento (de transitions.dev) */
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);   /* "Smooth ease out" */
+    --t-quick: 150ms;                          /* hover, cierres */
+    --t-fast: 250ms;                           /* pastilla, enfoque */
+    --t-medium: 350ms;                         /* barra de arriba */
 }
 
+/* BASE*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;   /* texto más nítido en Mac */
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    background: var(--fondo);
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
     color: var(--texto);
     min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* Fondo:imagen pixel art muy oscurecida + un resplandor lima arriba */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(60rem 28rem at 72% -8%, rgba(180, 228, 31, .10), transparent 60%),
+        linear-gradient(rgba(19, 36, 14, .93), rgba(19, 36, 14, .97)),
+        url('imagenes/fondo.jpg') center / cover no-repeat;
 }
 
 a {
@@ -30,13 +60,81 @@ a {
 }
 
 button {
-    font-family: inherit;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: 2px solid var(--lima);
+    outline-offset: 2px;
+}
+
+/* Íconos: todos heredan el color del texto y el trazo de 1.5px */
+.sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.icono {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--lima);
+    color: var(--sobre-lima);
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+}
+
+.etiqueta {
+    padding: 0 12px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--suave);
+}
+
+/* BARRA LATERAL (una sola superficie, sin cajas adentro)
+   La separación del contenido es una sombra de 1px, no un borde.*/
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: var(--ancho-lateral);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 14px 20px;
+    background: var(--sidebar);
+    box-shadow: 1px 0 0 var(--linea);
 }
 
 .logo {
-    font-size: 24px;
+    align-self: flex-start;
+    padding: 0 12px 20px;
+    font-size: 26px;
     font-weight: 700;
-    transition: transform .15s;
+    letter-spacing: -.02em;
+    transition: opacity var(--t-quick) ease-out;
 }
 
 .logo span {
@@ -44,130 +142,120 @@ button {
 }
 
 .logo:hover {
-    transform: scale(1.05);
+    opacity: .85;
 }
 
-.avatar {
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--lima);
-    color: var(--oscuro);
-    font-weight: 700;
-}
-
-/* esto es la barra lateral izquierda */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: var(--ancho-lateral);
-    padding: 20px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    background: var(--oscuro);
-    border-right: 1px solid var(--borde);
-}
-
-.sidebar-cabecera {
-    padding: 0 8px 14px;
-}
-
-.menu-usuario {
+.perfil {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px;
+    padding: 10px 12px;
     margin-bottom: 8px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, .06);
+    transition: background-color var(--t-quick) ease-out;
 }
 
-.menu-usuario:hover {
-    background: rgba(255, 255, 255, .1);
+.perfil:hover {
+    background: var(--hover);
 }
 
-.menu-usuario small {
+.perfil strong {
     display: block;
-    color: var(--texto-suave);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
-.sidebar-nav {
+.perfil small {
+    font-size: 13px;
+    color: var(--suave);
+}
+
+.nav {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.menu-link {
-    padding: 11px 12px;
-    border-radius: 10px;
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 42px;
+    padding: 0 12px;
+    border-radius: 12px;
     font-size: 15px;
+    font-weight: 500;
+    color: var(--suave);
+    transition: color var(--t-quick) ease-out, background-color var(--t-quick) ease-out;
 }
 
-.menu-link:hover {
-    background: rgba(255, 255, 255, .1);
+.nav-link:hover {
+    color: var(--texto);
+    background: var(--hover);
 }
 
-.menu-link.activo {
-    background: rgba(180, 228, 31, .15);
+/* Página actual: texto lima y un puntito con resplandor */
+.nav-link[aria-current="page"] {
     color: var(--lima);
 }
 
-.menu-link.salir {
-    margin-top: 10px;
-    border: 1px solid var(--borde);
-    text-align: center;
-}
-
-.menu-link.salir:hover {
+.nav-link[aria-current="page"]::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-left: auto;
+    border-radius: 50%;
     background: var(--lima);
-    color: var(--oscuro);
+    box-shadow: 0 0 12px var(--lima);
 }
 
-/* lo use para la lista de chats */
+.salir {
+    margin-top: 12px;
+}
+
+.salir:hover {
+    color: var(--lima);
+}
+
+/* ---------- Chats ---------- */
 .chats {
     flex: 1;
     min-height: 0;
+    margin-top: 18px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.menu-titulo {
-    padding: 16px 12px 6px;
-    font-size: 12px;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-    color: var(--texto-suave);
-}
-
 .chat {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 12px;
+    padding: 8px 12px;
     border-radius: 12px;
+    transition: background-color var(--t-quick) ease-out;
 }
 
 .chat:hover {
-    background: rgba(255, 255, 255, .08);
+    background: var(--hover);
 }
 
 .chat-icono {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: var(--tarjeta);
-    font-size: 18px;
+    background: rgba(255, 255, 255, .06);
+    color: var(--lima);
+    transition: background-color var(--t-quick) ease-out;
+}
+
+.chat:hover .chat-icono {
+    background: var(--lima-tinte);
 }
 
 .chat-info {
@@ -178,6 +266,8 @@ button {
 .chat-info strong {
     display: block;
     font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
 }
 
 .chat-info small {
@@ -185,156 +275,394 @@ button {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: var(--texto-suave);
+    font-size: 13px;
+    color: var(--suave);
+    font-variant-numeric: tabular-nums;   /* los números no "bailan" */
 }
 
 .chat-badge {
-    min-width: 22px;
-    padding: 2px 7px;
-    border-radius: 40px;
+    display: grid;
+    place-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
     background: var(--lima);
-    color: var(--oscuro);
+    color: var(--sobre-lima);
     font-size: 12px;
     font-weight: 600;
-    text-align: center;
+    font-variant-numeric: tabular-nums;
 }
 
-/* esto de aqui es el contenido de la pagina*/
+/* Contenido*/
 .contenido {
     margin-left: var(--ancho-lateral);
 }
 
+/* Barra de arriba: transparente; al bajar gana fondo y una línea fina */
 .topbar {
     position: sticky;
     top: 0;
     z-index: 10;
     display: flex;
     align-items: center;
-    padding: 12px 24px;
-    background: var(--oscuro);
-    border-bottom: 1px solid var(--borde);
+    padding: 16px 40px;
+    background: rgba(19, 36, 14, 0);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: background-color var(--t-medium) var(--ease), box-shadow var(--t-medium) var(--ease);
 }
 
+.topbar.scrolled {
+    background: rgba(19, 36, 14, .72);
+    box-shadow: 0 1px 0 var(--linea);
+}
+
+/* Buscador: un solo elemento, el borde es una sombra */
 .buscador {
-    flex: 1;
-    max-width: 460px;
-    padding: 10px 18px;
-    border: 1px solid var(--borde);
-    border-radius: 40px;
-    background: rgba(255, 255, 255, .08);
-    color: var(--texto);
-    outline: none;
+    position: relative;
+    display: block;
+    width: min(420px, 100%);
 }
 
-.buscador::placeholder {
-    color: var(--texto-suave);
+.buscador .icono {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    translate: 0 -50%;
+    color: var(--suave);
+    pointer-events: none;
+}
+
+.buscador input {
+    width: 100%;
+    height: 44px;
+    padding: 0 48px 0 46px;
+    border: 0;
+    outline: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .06);
+    color: var(--texto);
+    font: inherit;
+    font-size: 15px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .07), 0 1px 2px rgba(0, 0, 0, .25);
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+
+.buscador input::placeholder {
+    color: var(--suave);
+}
+
+.buscador input:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+.buscador input:focus {
+    background: rgba(255, 255, 255, .09);
+    box-shadow: 0 0 0 2px var(--lima), 0 10px 28px -10px rgba(180, 228, 31, .45);
+}
+
+.buscador kbd {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    translate: 0 -50%;
+    padding: 1px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, .07);
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--suave);
+    pointer-events: none;
+    transition: opacity var(--t-quick) ease-out;
+}
+
+.buscador input:focus ~ kbd {
+    opacity: 0;
 }
 
 .layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
-    gap: 28px;
-    max-width: 1100px;
-    margin: 28px auto;
-    padding: 0 24px;
+    grid-template-columns: minmax(0, 640px) 280px;
+    justify-content: center;
+    gap: 72px;
+    padding: 8px 40px 120px;
 }
 
 .derecha {
     align-self: start;
     position: sticky;
     top: 92px;
-    padding: 20px;
-    background: var(--tarjeta);
-    border: 1px solid var(--borde);
-    border-radius: 14px;
 }
 
-.derecha h2 {
-    margin-bottom: 14px;
-    font-size: 16px;
+/* Encabezado de bienvenida */
+.hero {
+    padding: 24px 0 28px;
+}
+
+.hero-titulo {
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    text-wrap: balance;
+}
+
+.hero-titulo .acento {
     color: var(--lima);
 }
 
-.sugerencias {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 14px;
-}
-
-.sugerencias a:hover {
-    color: var(--lima);
-}
-
-/* Esto de aqui es el feed de la pagina*/
-.feed {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.nueva-publicacion,
-.publicacion {
-    padding: 18px;
-    background: var(--tarjeta);
-    border: 1px solid var(--borde);
-    border-radius: 14px;
-}
-
-.nueva-publicacion textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--borde);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, .06);
-    color: var(--texto);
-    resize: none;
-    outline: none;
-}
-
-.nueva-publicacion textarea::placeholder {
-    color: var(--texto-suave);
-}
-
-.nueva-publicacion button {
+.hero-sub {
+    max-width: 42ch;
     margin-top: 10px;
-    padding: 9px 22px;
-    border: none;
-    border-radius: 40px;
+    font-size: 16px;
+    color: var(--suave);
+    text-wrap: pretty;
+}
+
+/*FILTRO CON PASTILLA QUE SE DESLIZA
+   Radio concéntrico: contenedor 16px = pastilla 12px + padding 4px*/
+.tabs {
+    position: relative;
+    display: inline-flex;
+    gap: 2px;
+    padding: 4px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .05);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
+}
+
+.tabs-pill {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 0;
+    height: 40px;
+    border-radius: 12px;
     background: var(--lima);
-    color: var(--oscuro);
-    font-weight: 600;
-    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 18px -8px rgba(180, 228, 31, .55);
+    transition: transform var(--t-fast) var(--ease), width var(--t-fast) var(--ease);
 }
 
-.autor {
+.tab {
+    position: relative;
+    z-index: 1;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--suave);
+    transition: color var(--t-quick) ease-out, transform var(--t-quick) var(--ease);
+}
+
+.tab:hover {
+    color: var(--texto);
+}
+
+.tab[aria-pressed="true"] {
+    color: var(--sobre-lima);
+}
+
+.tab:active {
+    transform: scale(.96);
+}
+
+/* NUEVA PUBLICACIÓN (área abierta, solo una línea fina abajo)*/
+.composer {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid var(--linea);
+    transition: border-color var(--t-fast) var(--ease);
 }
 
-.autor small {
-    display: block;
-    color: var(--texto-suave);
+.composer:focus-within {
+    border-bottom-color: rgba(180, 228, 31, .5);
 }
 
-.acciones {
-    display: flex;
-    gap: 10px;
-    margin-top: 14px;
-}
-
-.acciones button {
-    padding: 6px 14px;
-    border: 1px solid var(--borde);
-    border-radius: 40px;
+.composer textarea {
+    flex: 1;
+    min-height: 56px;
+    padding: 8px 0;
+    border: 0;
+    outline: 0;
+    resize: none;
     background: transparent;
     color: var(--texto);
-    cursor: pointer;
+    font: inherit;
+    font-size: 17px;
+    line-height: 1.5;
 }
 
-.acciones button:hover {
-    background: rgba(255, 255, 255, .1);
+.composer textarea::placeholder {
+    color: var(--suave);
+}
+
+.btn-publicar {
+    align-self: flex-end;
+    height: 40px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--lima);
+    color: var(--sobre-lima);
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 8px 18px -8px rgba(180, 228, 31, .55);
+    transition: transform var(--t-quick) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+
+.btn-publicar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .25), 0 14px 26px -8px rgba(180, 228, 31, .7);
+}
+
+.btn-publicar:active {
+    transform: scale(.96);
+}
+
+/* PUBLICACIONES (filas abiertas, sin tarjetas) Se separan con una línea fina que desaparece al pasar el mouse. */
+.post {
+    position: relative;
+    display: flex;
+    gap: 14px;
+    padding: 22px 18px;
+    margin: 0 -18px;
+    border-radius: 20px;
+    transition: background-color var(--t-quick) ease-out;
+}
+
+.post[hidden] {
+    display: none;
+}
+
+.post:hover {
+    background: var(--hover);
+}
+
+.post + .post::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    background: var(--linea);
+    transition: opacity var(--t-quick) ease-out;
+}
+
+.post:hover::before,
+.post:hover + .post::before {
+    opacity: 0;
+}
+
+.post-cuerpo {
+    flex: 1;
+    min-width: 0;
+}
+
+.post-cab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.post-cab strong {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.post-cab span {
+    font-size: 13px;
+    color: var(--suave);
+}
+
+.post p {
+    margin-top: 4px;
+    font-size: 16px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.post-acciones {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 -6px -12px;
+}
+
+.accion {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--suave);
+    font-variant-numeric: tabular-nums;
+    transition: color var(--t-quick) ease-out, background-color var(--t-quick) ease-out, transform var(--t-quick) var(--ease);
+}
+
+.accion:hover {
+    color: var(--texto);
+    background: var(--hover);
+}
+
+.accion:active {
+    transform: scale(.96);
+}
+
+.accion .icono {
+    width: 19px;
+    height: 19px;
+    fill: transparent;
+    transition: fill var(--t-quick) ease-out;
+}
+
+.accion .num {
+    display: inline-block;   /* necesario para animar el número al cambiar */
+}
+
+.accion[aria-pressed="true"] {
+    color: var(--lima);
+}
+
+.accion[aria-pressed="true"] .icono {
+    fill: currentColor;
+}
+
+/*ESTADO INICIAL DE LAS ANIMACIONES
+   Solo se esconde lo que GSAP va a mostrar. Si el JS no carga, o si la
+   persona pidió menos movimiento, inicio.js quita la clase "js" y todo
+   se ve normal.*/
+@media (prefers-reduced-motion: no-preference) {
+    .js .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    .js .reveal-x {
+        opacity: 0;
+        transform: translateX(-14px);
+    }
+
+    .js .reveal-text {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}
+
+/* Movimiento reducido: sin transiciones */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
 }
