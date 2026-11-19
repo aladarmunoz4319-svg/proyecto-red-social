@@ -1,0 +1,321 @@
+:root {
+    --bg-dark: #111c0f;
+    --bg-main: #182914;
+    --bg-card: #21361c;
+    --bg-input: #283f22;
+    --border-green: #34522d;
+    --lime: #b4f022;
+    --lime-hover: #9ed618;
+    --white: #ffffff;
+    --muted: #9eb399;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Contenedor principal centrado */
+.chat-container {
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--bg-main);
+    border-left: 1px solid var(--border-green);
+    border-right: 1px solid var(--border-green);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Encabezado del canal */
+.channel-header {
+    background-color: var(--bg-dark);
+    border-bottom: 1px solid var(--border-green);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: var(--lime);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-green);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    background-color: var(--lime);
+    color: var(--bg-dark);
+}
+
+.channel-avatar {
+    width: 46px;
+    height: 46px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--lime);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.header-info h1 {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.header-info p {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.brand-tag {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.brand-tag .lime {
+    color: var(--lime);
+}
+
+/* Área del feed (memes y mensajes) */
+.feed-area {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.feed-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.feed-area::-webkit-scrollbar-thumb {
+    background-color: var(--border-green);
+    border-radius: 10px;
+}
+
+/* Tarjeta de cada publicación */
+.post-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-green);
+    border-radius: 16px;
+    padding: 1.2rem;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.post-top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    background-color: var(--lime);
+    color: var(--bg-dark);
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-meta strong {
+    font-size: 0.95rem;
+}
+
+.user-meta span {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.post-caption {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.post-photo {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-green);
+    max-height: 400px;
+}
+
+.post-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Botones de Like y Comentario */
+.post-footer {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.2rem;
+}
+
+.btn-like, .btn-comment {
+    background-color: var(--bg-input);
+    border: 1px solid transparent;
+    color: var(--white);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+}
+
+.btn-like:hover, .btn-comment:hover {
+    border-color: var(--lime);
+}
+
+.btn-like.liked {
+    background-color: rgba(180, 240, 34, 0.15);
+    border-color: var(--lime);
+    color: var(--lime);
+}
+
+/* Vista previa de foto antes de enviar */
+.preview-box {
+    background-color: var(--bg-dark);
+    border-top: 1px solid var(--border-green);
+    padding: 0.8rem 1.5rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.preview-box img {
+    height: 70px;
+    border-radius: 8px;
+    border: 1px solid var(--lime);
+}
+
+.btn-remove-img {
+    background-color: var(--bg-card);
+    color: var(--white);
+    border: 1px solid var(--border-green);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Barra inferior de escritura */
+.input-bar {
+    background-color: var(--bg-dark);
+    border-top: 1px solid var(--border-green);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-photo {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-green);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.btn-photo:hover {
+    border-color: var(--lime);
+}
+
+#input-texto {
+    flex: 1;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-green);
+    color: var(--white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+#input-texto:focus {
+    border-color: var(--lime);
+}
+
+.btn-send {
+    background-color: var(--lime);
+    color: var(--bg-dark);
+    border: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 25px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-send:hover {
+    background-color: var(--lime-hover);
+}
+
+/* Lienzo de la estela neón */
+#estela-neon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Permite hacer clic normal en botones, inputs y fotos */
+    z-index: 9999;
+}
+
+@media (max-width: 768px) {
+    #estela-neon {
+        display: none;
+    }
+}
