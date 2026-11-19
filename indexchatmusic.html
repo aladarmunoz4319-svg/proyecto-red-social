@@ -1,46 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatMusic</title>
+    <title>Becool | Chat de Música</title>
+    <link rel="stylesheet" href="css/chatmusic.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section class="chat">
-    <header class="chat__header">
-        <button class="button chat__close" aria-label="Cerrar"></button>
-        <h2 class="chat__name">Bienvenido al chat de Música</h2>
-        <p class="chat__status"></p>
-    </header>
-    <!-- Contenedor de mensajes -->
-    <div class="chat__messages" aria-live="polite">
-        <!-- Componente de mensaje receptor -->
-        <article class="message message--receptor">
-            <h3 class="message__username"></h3>
-            <p class="message__text"></p>
-        </article>
-        <!-- Componente de mensaje emisor -->
-        <article class="message message--emisor">
-            <h3 class="message__username"></h3>
-            <p class="message__text"></p>
-        </article>
-    </div>
-    <footer class="chat__footer">
-        <form class="chat__form">
-            <!-- Input que crece con el texto -->
-            <div
-                role="textbox"
-                aria-label="Nuevo mensaje"
-                aria-placeholder="Escribe tu mensaje..."
-                contenteditable="true"
-                class="chat__input"
-                name="mensaje"
+
+    <div class="chat-container">
+      
+        <header class="channel-header">
+            <div class="header-info">
+                <a href="indextwo.html" class="btn-back" title="Volver a Inicio">←</a>
+                <div class="channel-avatar">🎵</div>
+                <div>
+                    <h1>Música</h1>
+                    <p>Canal oficial • Comparte fotos, canciones y gustos</p>
+                </div>
+            </div>
+            <div class="brand-tag">
+                <span>Be</span><span class="lime">cool</span>
+            </div>
+        </header>
+
+        <!-- Área de publicaciones  mensajes -->
+        <main class="feed-area" id="feed">
+
+            <!-- Publicación 1  -->
+            <article class="post-card">
+                <div class="post-top">
+                    <div class="user-avatar">A</div>
+                    <div class="user-meta">
+                        <strong>Aladar</strong>
+                        <span>hace 10 min</span>
+                    </div>
+                </div>
+                <p class="post-caption">Probando el canal de Música en Becool, suban sus mejores fotos de conciertos o playlists 🎧🔥</p>
+                <div class="post-photo">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" alt="Concierto">
+                </div>
+                <div class="post-footer">
+                    <button class="btn-like liked">❤️ <span class="count">12</span></button>
+                    <button class="btn-comment">💬 <span class="count">2</span></button>
+                </div>
+            </article>
+
+            <!-- Publicación 2-->
+            <article class="post-card">
+                <div class="post-top">
+                    <div class="user-avatar">M</div>
+                    <div class="user-meta">
+                        <strong>Maurix</strong>
+                        <span>hace 2 min</span>
+                    </div>
+                </div>
+                <p class="post-caption">Aladar: probando el chat de música 🚀</p>
+                <div class="post-footer">
+                    <button class="btn-like">🤍 <span class="count">4</span></button>
+                    <button class="btn-comment">💬 <span class="count">0</span></button>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- Previsualización rápida cuando seleccionas una foto -->
+        <div id="preview-box" class="preview-box" style="display: none;">
+            <img id="preview-img" src="" alt="Vista previa">
+            <button type="button" id="btn-remove-img" class="btn-remove-img">✕</button>
+        </div>
+
+        <!-- Barra inferior para subir foto y enviar -->
+        <form class="input-bar" id="chat-form">
+            <label for="input-foto" class="btn-photo" title="Adjuntar foto">📷</label>
+            <input type="file" id="input-foto" accept="image/*" hidden>
             
-            ></div>
-             <button type="submit">Enviar</button>
+            <input type="text" id="input-texto" placeholder="Escribe un mensaje o describe tu foto..." autocomplete="off">
+            
+            <button type="submit" class="btn-send">Enviar</button>
         </form>
-    </footer>
-</section>
-    
+
+    </div>
+
+<canvas id="estela-neon"></canvas>
+
+    <script src="chatmusic.js"></script>
 </body>
 </html>
