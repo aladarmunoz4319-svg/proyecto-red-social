@@ -666,3 +666,99 @@ button {
         animation-duration: .01ms !important;
     }
 }
+
+
+/* 
+   PÁGINA DE PERFIL (perfil.php)*/
+/* Tu bloque de perfil en la barra lateral, cuando estás en tu perfil */
+.perfil[aria-current="page"] {
+    background: var(--hover);
+}
+
+.perfil[aria-current="page"] strong {
+    color: var(--lima);
+}
+
+.perfil-pagina {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 72px 40px 120px;
+}
+
+.perfil-cab {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 32px;
+}
+
+.avatar-grande {
+    width: 96px;
+    height: 96px;
+    font-size: 40px;
+    flex-shrink: 0;
+}
+
+.perfil-nombre {
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    text-wrap: balance;
+}
+
+.perfil-sub {
+    margin-top: 8px;
+    font-size: 15px;
+    color: var(--suave);
+}
+
+.perfil-seccion {
+    padding: 28px 0;
+    border-top: 1px solid var(--linea);
+}
+
+.perfil-bio {
+    margin-top: 12px;
+    max-width: 60ch;
+    font-size: 16px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.perfil-bio.vacio {
+    color: var(--suave);
+}
+
+/* Datos: filas abiertas, sin cajas */
+.perfil-datos {
+    margin-top: 8px;
+}
+
+.perfil-datos div {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--linea);
+}
+
+.perfil-datos div:last-child {
+    border-bottom: 0;
+}
+
+.perfil-datos dt {
+    color: var(--suave);
+    font-size: 15px;
+}
+
+.perfil-datos dd {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: right;
+    word-break: break-word;
+}
+
+.perfil-seccion .etiqueta {
+    padding-left: 0;
+}
