@@ -4,27 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Becool | Canal</title>
-
-    <!-- Estilos de esta página -->
     <link rel="stylesheet" href="css/styletwo.css">
     <link rel="stylesheet" href="css/canal.css">
-
-    <!-- GSAP (gratis, incluye todos sus plugins) y ScrollTrigger: animaciones al bajar -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-
-    <!-- Nuestro JS: va en el head para que no haya parpadeo al cargar -->
     <script src="js/inicio.js"></script>
-    <!-- Revisa la sesión y rellena tu nombre (js/sesion.js) -->
     <script src="js/sesion.js" defer></script>
-    <!-- Publicaciones, fotos, likes y comentarios del canal -->
     <script src="js/canal.js" defer></script>
-    <!-- Estela neón del cursor -->
     <script src="js/estela.js" defer></script>
 </head>
 <body>
 
-    <!-- Íconos: se definen una sola vez y se reutilizan con <use href="#nombre"> -->
+    <!-- Íconos importacion de iconos -->
     <svg class="sprite" aria-hidden="true">
         <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></symbol>
         <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
@@ -42,7 +33,7 @@
 
     <aside class="sidebar" aria-label="Menú principal">
 
-        <!-- El logo-->
+        <!-- logo-->
         <a href="indextwo.html" class="logo" aria-label="Becool, ir al inicio">Be<span>cool</span></a>
 
         <a href="perfil.html" class="perfil reveal-x">
