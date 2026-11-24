@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    /* Colores (mismo verde y lima del login) */
+    /* Colores */
     --bg: #13240e;
     --sidebar: #0f1c0a;
     --texto: #f2f7ea;
@@ -14,7 +14,7 @@
 
     --ancho-lateral: 280px;
 
-    /* Tokens de movimiento (de transitions.dev) */
+    /* Tokens de movimiento */
     --ease: cubic-bezier(0.22, 1, 0.36, 1);   /* "Smooth ease out" */
     --t-quick: 150ms;                          /* hover, cierres */
     --t-fast: 250ms;                           /* pastilla, enfoque */
@@ -41,7 +41,7 @@ body {
     line-height: 1.5;
 }
 
-/* Fondo:imagen pixel art muy oscurecida + un resplandor lima arriba */
+/* Fondoimagen */
 body::before {
     content: "";
     position: fixed;
@@ -72,7 +72,7 @@ button {
     outline-offset: 2px;
 }
 
-/* Íconos: todos heredan el color del texto y el trazo de 1.5px */
+/* Íconos todos heredan el color del texto y el trazo de 1.5px */
 .sprite {
     position: absolute;
     width: 0;
@@ -114,8 +114,7 @@ button {
     color: var(--suave);
 }
 
-/* BARRA LATERAL (una sola superficie, sin cajas adentro)
-   La separación del contenido es una sombra de 1px, no un borde.*/
+/* BARRA LATERAL.*/
 .sidebar {
     position: fixed;
     inset: 0 auto 0 0;
@@ -218,7 +217,7 @@ button {
     color: var(--lima);
 }
 
-/* ---------- Chats ---------- */
+/* Chats */
 .chats {
     flex: 1;
     min-height: 0;
@@ -277,7 +276,7 @@ button {
     text-overflow: ellipsis;
     font-size: 13px;
     color: var(--suave);
-    font-variant-numeric: tabular-nums;   /* los números no "bailan" */
+    font-variant-numeric: tabular-nums;   /* los números no "bailan se quedan estaticos sin dianica */
 }
 
 .chat-badge {
@@ -299,7 +298,7 @@ button {
     margin-left: var(--ancho-lateral);
 }
 
-/* Barra de arriba: transparente; al bajar gana fondo y una línea fina */
+/* Barra de arriba transparente al bajar gana fondo y una línea fina */
 .topbar {
     position: sticky;
     top: 0;
@@ -318,7 +317,7 @@ button {
     box-shadow: 0 1px 0 var(--linea);
 }
 
-/* Buscador: un solo elemento, el borde es una sombra */
+/* Buscador un solo elemento, el borde es una sombra */
 .buscador {
     position: relative;
     display: block;
@@ -471,7 +470,7 @@ button {
     transform: scale(.96);
 }
 
-/* NUEVA PUBLICACIÓN (área abierta, solo una línea fina abajo)*/
+/* NUEVA PUBLICACIÓN */
 .composer {
     display: flex;
     align-items: flex-start;
@@ -525,7 +524,7 @@ button {
     transform: scale(.96);
 }
 
-/* PUBLICACIONES (filas abiertas, sin tarjetas) Se separan con una línea fina que desaparece al pasar el mouse. */
+/* PUBLICACIONES. */
 .post {
     position: relative;
     display: flex;
@@ -554,7 +553,7 @@ button {
     background: var(--linea);
     transition: opacity var(--t-quick) ease-out;
 }
-
+/* este sirve para que las publicaciones */
 .post:hover::before,
 .post:hover + .post::before {
     opacity: 0;
@@ -636,10 +635,6 @@ button {
     fill: currentColor;
 }
 
-/*ESTADO INICIAL DE LAS ANIMACIONES
-   Solo se esconde lo que GSAP va a mostrar. Si el JS no carga, o si la
-   persona pidió menos movimiento, inicio.js quita la clase "js" y todo
-   se ve normal.*/
 @media (prefers-reduced-motion: no-preference) {
     .js .reveal {
         opacity: 0;
@@ -657,7 +652,7 @@ button {
     }
 }
 
-/* Movimiento reducido: sin transiciones */
+/* Movimiento reducido sin transiciones */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -667,10 +662,6 @@ button {
     }
 }
 
-
-/* 
-   PÁGINA DE PERFIL (perfil.php)*/
-/* Tu bloque de perfil en la barra lateral, cuando estás en tu perfil */
 .perfil[aria-current="page"] {
     background: var(--hover);
 }
@@ -730,7 +721,7 @@ button {
     color: var(--suave);
 }
 
-/* Datos: filas abiertas, sin cajas */
+/* Datos filas abiertas sin cajas */
 .perfil-datos {
     margin-top: 8px;
 }
@@ -761,4 +752,45 @@ button {
 
 .perfil-seccion .etiqueta {
     padding-left: 0;
+}
+
+/* Foto de perfil dentro del círculo */
+.avatar {
+    overflow: hidden;
+}
+
+.avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Botón de colorgris de editar perfil, Cambiar foto */
+.btn-sec {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .07);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--texto);
+    transition: background-color var(--t-quick) ease-out, transform var(--t-quick) var(--ease);
+}
+
+.btn-sec:hover {
+    background: rgba(255, 255, 255, .11);
+}
+
+.btn-sec:active {
+    transform: scale(.96);
+}
+
+/* En el perfil, el botón va a la derecha */
+.perfil-cab .btn-sec {
+    margin-left: auto;
 }

@@ -1,0 +1,290 @@
+/* estilos de la página del canal (canal.html).
+   Se carga DESPUÉS de styletwo.css y reutiliza sus variables y clases
+   (.avatar, .composer, .post, .accion, .btn-publicar...). */
+
+/* Columna central */
+.canal-pagina {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 56px 40px 120px;
+}
+
+/* Chat actual marcado en la barra lateral */
+.chat[aria-current="page"] {
+    background: var(--hover);
+}
+
+.chat[aria-current="page"] .chat-info strong {
+    color: var(--lima);
+}
+
+/*Encabezado del canal */
+.canal-cab {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 24px;
+}
+
+.canal-icono {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--lima-tinte);
+    color: var(--lima);
+}
+
+.canal-icono .icono {
+    width: 26px;
+    height: 26px;
+}
+
+.canal-titulo {
+    font-size: clamp(2rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    text-wrap: balance;
+}
+
+.canal-desc {
+    margin-top: 6px;
+    font-size: 15px;
+    color: var(--suave);
+    text-wrap: pretty;
+}
+
+/* Composer con foto  */
+.composer-campo {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.composer-campo textarea {
+    flex: none;
+}
+
+.composer-barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+}
+
+.btn-foto {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--suave);
+    transition: color var(--t-quick) ease-out, background-color var(--t-quick) ease-out, transform var(--t-quick) var(--ease);
+}
+
+.btn-foto:hover {
+    color: var(--lima);
+    background: var(--lima-tinte);
+}
+
+.btn-foto:active {
+    transform: scale(.96);
+}
+
+.btn-publicar:disabled {
+    opacity: .55;
+    cursor: default;
+    transform: none;
+}
+
+/* Vista previa de la foto antes de publicar */
+.preview {
+    position: relative;
+    width: fit-content;
+    margin: 6px 0 4px;
+}
+
+.preview[hidden],
+.canal-error[hidden] {
+    display: none;
+}
+
+.preview img {
+    display: block;
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .1);
+}
+
+.preview-quitar {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(15, 28, 10, .8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background-color var(--t-quick) ease-out, transform var(--t-quick) var(--ease);
+}
+
+.preview-quitar:hover {
+    background: rgba(15, 28, 10, .95);
+}
+
+.preview-quitar:active {
+    transform: scale(.96);
+}
+
+.preview-quitar .icono {
+    width: 16px;
+    height: 16px;
+}
+
+.canal-error {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #ff9a8d;
+}
+
+/* Publicacione */
+.vacio-feed {
+    padding: 56px 0;
+    text-align: center;
+    color: var(--suave);
+}
+
+/* La foto de una publicación es el borde es un anillo de sombra, no un borde */
+.post-foto {
+    margin-top: 12px;
+}
+
+.post-foto img {
+    display: block;
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+/*Comentarios se abren debajo de la publicación */
+.comentarios {
+    margin-top: 14px;
+    padding-top: 6px;
+    border-top: 1px solid var(--linea);
+}
+
+.comentario {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0 2px;
+}
+
+.comentario .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+}
+
+.comentario-cuerpo {
+    min-width: 0;
+}
+
+.comentario-cab {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.comentario-cab strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.comentario-cab span {
+    font-size: 12px;
+    color: var(--suave);
+}
+
+.comentario-texto {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.comentario-vacio {
+    padding: 12px 0 4px;
+    font-size: 14px;
+    color: var(--suave);
+}
+
+.comentario-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.comentario-form input {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    padding: 0 16px;
+    border: 0;
+    outline: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .06);
+    color: var(--texto);
+    font: inherit;
+    font-size: 14px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .07);
+    transition: background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+
+.comentario-form input::placeholder {
+    color: var(--suave);
+}
+
+.comentario-form input:focus {
+    background: rgba(255, 255, 255, .09);
+    box-shadow: 0 0 0 2px var(--lima);
+}
+
+.comentario-form button {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: var(--lima);
+    color: var(--sobre-lima);
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform var(--t-quick) var(--ease), opacity var(--t-quick) ease-out;
+}
+
+.comentario-form button:active {
+    transform: scale(.96);
+}
+
+.comentario-form button:disabled {
+    opacity: .55;
+}
+
+/*Estela neón del cursor*/
+.estela-neon {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;   /* los clics pasan a través */
+}

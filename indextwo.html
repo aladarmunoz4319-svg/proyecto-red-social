@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="css/styletwo.css">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-    <script src="inicio.js"></script>
+    <script src="js/inicio.js"></script>
+    <script src="js/sesion.js" defer></script>
 </head>
 <body>
-
-    <!-- Íconos: se definen una sola vez y se reutilizan con <use href="#nombre"> -->
+    <!--iconos -->
     <svg class="sprite" aria-hidden="true">
         <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></symbol>
         <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
@@ -25,16 +25,15 @@
         <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14c1 1.5 2.3 2 3.5 2s2.5-.5 3.5-2"/><path d="M9 9.5h.01M15 9.5h.01"/></symbol>
     </svg>
 
-    <!-- BARRA LATERAL: fija, una sola superficie -->
     <aside class="sidebar" aria-label="Menú principal">
 
-        <!-- El logo es un link: regresa a la página principal -->
+        <!--El logo-->
         <a href="indextwo.html" class="logo" aria-label="Becool, ir al inicio">Be<span>cool</span></a>
 
-        <a href="#" class="perfil reveal-x">
-            <span class="avatar">A</span>
+        <a href="perfil.html" class="perfil reveal-x">
+            <span class="avatar" data-usuario="inicial"></span>
             <span>
-                <strong>Aladar</strong>
+                <strong data-usuario="nombre"></strong>
                 <small>Ver perfil</small>
             </span>
         </a>
@@ -43,10 +42,7 @@
             <a href="indextwo.html" class="nav-link reveal-x" aria-current="page">
                 <svg class="icono"><use href="#i-home"/></svg>Inicio
             </a>
-            <a href="#" class="nav-link reveal-x">
-                <svg class="icono"><use href="#i-user"/></svg>Mi perfil
-            </a>
-            <a href="#" class="nav-link reveal-x">
+            <a href="configuracion.html" class="nav-link reveal-x">
                 <svg class="icono"><use href="#i-sliders"/></svg>Configuración
             </a>
         </nav>
@@ -54,30 +50,28 @@
         <div class="chats">
             <p class="etiqueta reveal-x">Chats</p>
 
-            <a href="indexchatmusic.html" class="chat reveal-x">
+            <a href="canal.html?c=musica" class="chat reveal-x">
                 <span class="chat-icono"><svg class="icono"><use href="#i-music"/></svg></span>
                 <span class="chat-info">
                     <strong>Música</strong>
-                    <small>Aladar: probando</small>
+                    <small>Artistas y similares</small>
                 </span>
-                <span class="chat-badge">3</span>
             </a>
 
-            <a href="indexchatsport.html" class="chat reveal-x">
+            <a href="canal.html?c=deportes" class="chat reveal-x">
                 <span class="chat-icono"><svg class="icono"><use href="#i-ball"/></svg></span>
                 <span class="chat-info">
                     <strong>Deportes</strong>
-                    <small>probando</small>
+                    <small>Lo mejor del deporte</small>
                 </span>
             </a>
 
-            <a href="indexchatmemes.html" class="chat reveal-x">
+            <a href="canal.html?c=memes" class="chat reveal-x">
                 <span class="chat-icono"><svg class="icono"><use href="#i-smile"/></svg></span>
                 <span class="chat-info">
                     <strong>Memes</strong>
-                    <small>probando</small>
+                    <small>Lo mejor del humor</small>
                 </span>
-                <span class="chat-badge">1</span>
             </a>
         </div>
 
@@ -86,7 +80,7 @@
         </a>
     </aside>
 
-    <!--  CONTENIDO -->
+    <!--contenido-->
     <div class="contenido">
 
         <header class="topbar">
@@ -99,153 +93,45 @@
 
         <main class="layout">
 
-            <!-- Columna principal -->
+            <!--Contenido principal -->
             <section class="feed">
 
                 <header class="hero">
-                    <h1 class="hero-titulo reveal-text">Hola, <span class="acento">Aladar</span></h1>
-                    <p class="hero-sub reveal-text">Esto es lo nuevo en tus comunidades.</p>
+                    <h1 class="hero-titulo reveal-text">Hola, <span class="acento" data-usuario="nombre"></span></h1>
+                    <p class="hero-sub reveal-text">Bienvenido que interes tienes en mente.</p>
                 </header>
 
-                <!-- Filtro con "pastilla" que se desliza -->
-                <div class="tabs" role="group" aria-label="Filtrar publicaciones">
-                    <span class="tabs-pill" aria-hidden="true"></span>
-                    <button type="button" class="tab" data-filtro="todo" aria-pressed="true">Para ti</button>
-                    <button type="button" class="tab" data-filtro="musica" aria-pressed="false">Música</button>
-                    <button type="button" class="tab" data-filtro="deportes" aria-pressed="false">Deportes</button>
-                    <button type="button" class="tab" data-filtro="memes" aria-pressed="false">Memes</button>
-                </div>
-
-                <!-- Nueva publicación: área abierta, sin caja -->
                 <form class="composer reveal">
-                    <span class="avatar">A</span>
-                    <textarea placeholder="¿Qué quieres compartir hoy?" rows="2" aria-label="Escribe tu publicación"></textarea>
-                    <button type="submit" class="btn-publicar">Publicar</button>
+                    <span class="avatar" data-usuario="inicial"></span>
+                     <p class="hero-sub reveal-text">Selecciona un chat para continuar</p>
                 </form>
 
-                <!-- Publicaciones: filas abiertas separadas por una línea fina -->
-                <article class="post reveal" data-comunidad="musica">
-                    <span class="avatar">A</span>
-                    <div class="post-cuerpo">
-                        <div class="post-cab"><strong>Aladar</strong><span>en Música · hace 5 min</span></div>
-                        <p>Primera publicación de prueba en Becool. Si ves esto, el login, la base de datos y el correo ya funcionan.</p>
-                        <div class="post-acciones">
-                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
-                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">12</span>
-                            </button>
-                            <button type="button" class="accion" aria-label="Comentarios">
-                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">3</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
+               
 
-                <article class="post reveal" data-comunidad="memes">
-                    <span class="avatar">M</span>
-                    <div class="post-cuerpo">
-                        <div class="post-cab"><strong>Maurix</strong><span>en Memes · hace 1 h</span></div>
-                        <p>Cuando por fin te funciona el login, no se crean no funciono, ESTO ES SOLO COMO SE VERA.</p>
-                        <div class="post-acciones">
-                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
-                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">48</span>
-                            </button>
-                            <button type="button" class="accion" aria-label="Comentarios">
-                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">9</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post reveal" data-comunidad="deportes">
-                    <span class="avatar">A</span>
-                    <div class="post-cuerpo">
-                        <div class="post-cab"><strong>Ana</strong><span>en Deportes · hace 2 h</span></div>
-                        <p>PRUEBA DE COMO SE VERA UN COMENTARIOX</p>
-                        <div class="post-acciones">
-                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
-                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">31</span>
-                            </button>
-                            <button type="button" class="accion" aria-label="Comentarios">
-                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">14</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post reveal" data-comunidad="musica">
-                    <span class="avatar">L</span>
-                    <div class="post-cuerpo">
-                        <div class="post-cab"><strong>Luis</strong><span>en Música · hace 3 h</span></div>
-                        <p>Recomiéndenme discos para estudiar. Que no tengan letra, porque me distraigo cantando.</p>
-                        <div class="post-acciones">
-                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
-                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">22</span>
-                            </button>
-                            <button type="button" class="accion" aria-label="Comentarios">
-                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">27</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post reveal" data-comunidad="memes">
-                    <span class="avatar">S</span>
-                    <div class="post-cuerpo">
-                        <div class="post-cab"><strong>Sofía</strong><span>en Memes · hace 5 h</span></div>
-                        <p>Mi cara cuando el código dice "Not Found" y el archivo está justo ahí, en otra carpeta.</p>
-                        <div class="post-acciones">
-                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
-                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">67</span>
-                            </button>
-                            <button type="button" class="accion" aria-label="Comentarios">
-                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">11</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post reveal" data-comunidad="deportes">
-                    <span class="avatar">D</span>
-                    <div class="post-cuerpo">
-                        <div class="post-cab"><strong>Diego</strong><span>en Deportes · ayer</span></div>
-                        <p>¿Quién se apunta a armar un torneo de fútbol rápido el fin de semana? Ya tengo la cancha.</p>
-                        <div class="post-acciones">
-                            <button type="button" class="accion" data-like aria-pressed="false" aria-label="Me gusta">
-                                <svg class="icono"><use href="#i-heart"/></svg><span class="num">18</span>
-                            </button>
-                            <button type="button" class="accion" aria-label="Comentarios">
-                                <svg class="icono"><use href="#i-comment"/></svg><span class="num">35</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            </section>
-
+                
             <!-- Columna derecha: sugerencias, sin caja -->
+             <br>
             <aside class="derecha reveal">
                 <p class="etiqueta">Sugerido para ti</p>
 
-                <a href="indexchatmusic.html" class="chat">
+                <a href="canal.html?c=musica" class="chat">
                     <span class="chat-icono"><svg class="icono"><use href="#i-music"/></svg></span>
                     <span class="chat-info">
                         <strong>Música</strong>
-                        <small>1,240 miembros</small>
                     </span>
                 </a>
 
-                <a href="indexchatsport.html" class="chat">
+                <a href="canal.html?c=deportes" class="chat">
                     <span class="chat-icono"><svg class="icono"><use href="#i-ball"/></svg></span>
                     <span class="chat-info">
                         <strong>Deportes</strong>
-                        <small>860 miembros</small>
                     </span>
                 </a>
 
-                <a href="indexchatmemes.html" class="chat">
+                <a href="canal.html?c=memes" class="chat">
                     <span class="chat-icono"><svg class="icono"><use href="#i-smile"/></svg></span>
                     <span class="chat-info">
                         <strong>Memes</strong>
-                        <small>2,310 miembros</small>
                     </span>
                 </a>
             </aside>

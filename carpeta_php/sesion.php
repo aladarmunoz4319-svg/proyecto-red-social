@@ -1,9 +1,4 @@
 <?php
-// =====================================================================
-// sesion.php: se incluye al inicio de cada página que requiere sesión.
-//  1) Si no iniciaste sesión, te regresa al login.
-//  2) Si sí, carga tus datos de la base de datos en $usuario.
-// =====================================================================
 session_start();
 
 if (!isset($_SESSION["usuario_id"])) {
