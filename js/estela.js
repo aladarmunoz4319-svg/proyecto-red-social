@@ -8,7 +8,7 @@
     document.body.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
-    const MAX_PUNTOS = 15;          // largo de la estela
+    const MAX_PUNTOS = 5;          // largo de la estela
     let puntos = [];
     let animando = false;
 

@@ -1,6 +1,5 @@
 const PAGINA_INICIO = 'inicio.html';
 
-// Utilidades 
 function crearMensaje(form) {
     let mensaje = form.querySelector('.mensaje-form');
     if (!mensaje) {
@@ -291,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hayGsap = Boolean(window.gsap && window.ScrollTrigger);
 
     if (!hayGsap || menosMovimiento) {
-        // Sin GSAP o con "reducir movimiento": mostramos todo sin animar
         html.classList.remove('js');
     } else {
         gsap.registerPlugin(ScrollTrigger);
@@ -304,15 +302,15 @@ document.addEventListener('DOMContentLoaded', () => {
     atajoBuscador();
 });
 
-/* Entrada de la página (una sola vez, al cargar)  */
+/* Entrada de la página (una sola vez, al cargar)*/
 function animarEntrada() {
-    // Barra lateral: cada fila entra desde la izquierda, una tras otra (40ms)
+    // Barra lateral cada fila entra desde la izquierda, una tras otra
     gsap.fromTo('.reveal-x',
         { opacity: 0, x: -14 },
         { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out', stagger: 0.04 }
     );
 
-    // Título y subtítulo: suben con un poquito de desenfoque (100ms entre líneas)
+    // Título y subtítulo suben con un poquito de desenfoque
     gsap.fromTo('.reveal-text',
         { opacity: 0, y: 12, filter: 'blur(3px)' },
         {
@@ -323,7 +321,7 @@ function animarEntrada() {
     );
 }
 
-/* Animaciones al bajar (ScrollTrigger)  */
+/* Animaciones al bajar (Scroll)  */
 function animarAlBajar() {
     // Cada publicación aparece cuando entra en pantalla.
     // "batch" agrupa las que entran juntas y las anima escalonadas.
@@ -387,7 +385,7 @@ function iniciarFiltro() {
     window.addEventListener('resize', () => moverPastilla(activo(), false));
 }
 
-/*  Me gusta: el número cambia con un pequeño "pop"  */
+/*  dinamica de los likes */
 function iniciarLikes() {
     const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -412,7 +410,7 @@ function iniciarLikes() {
     });
 }
 
-/* Atajo: la tecla "/" enfoca el buscador */
+/* Atajo de la tecla "/" enfoca el buscador */
 function atajoBuscador() {
     const buscador = document.querySelector('.buscador input');
     if (!buscador) return;

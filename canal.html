@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Becool | Canal</title>
     <link rel="stylesheet" href="css/styletwo.css">
+    <link rel="stylesheet" href="css/derecha.css">
     <link rel="stylesheet" href="css/canal.css">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="js/inicio.js"></script>
+    <script src="js/barra.js" defer></script>
     <script src="js/sesion.js" defer></script>
     <script src="js/canal.js" defer></script>
     <script src="js/estela.js" defer></script>
 </head>
 <body>
 
-    <!-- Íconos importacion de iconos -->
+    <!-- Íconos -->
     <svg class="sprite" aria-hidden="true">
         <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></symbol>
         <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
@@ -30,67 +32,11 @@
         <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-8 8"/></symbol>
         <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     </svg>
-
-    <aside class="sidebar" aria-label="Menú principal">
-
-        <!-- logo-->
-        <a href="indextwo.html" class="logo" aria-label="Becool, ir al inicio">Be<span>cool</span></a>
-
-        <a href="perfil.html" class="perfil reveal-x">
-            <span class="avatar" data-usuario="inicial"></span>
-            <span>
-                <strong data-usuario="nombre"></strong>
-                <small>Ver perfil</small>
-            </span>
-        </a>
-
-        <nav class="nav" aria-label="Secciones">
-            <a href="indextwo.html" class="nav-link reveal-x">
-                <svg class="icono"><use href="#i-home"/></svg>Inicio
-            </a>
-            <a href="configuracion.html" class="nav-link reveal-x">
-                <svg class="icono"><use href="#i-sliders"/></svg>Configuración
-            </a>
-        </nav>
-
-        <div class="chats">
-            <p class="etiqueta reveal-x">Chats</p>
-
-            <a href="canal.html?c=musica" class="chat reveal-x">
-                <span class="chat-icono"><svg class="icono"><use href="#i-music"/></svg></span>
-                <span class="chat-info">
-                    <strong>Música</strong>
-                    <small>Discos y conciertos</small>
-                </span>
-            </a>
-
-            <a href="canal.html?c=deportes" class="chat reveal-x">
-                <span class="chat-icono"><svg class="icono"><use href="#i-ball"/></svg></span>
-                <span class="chat-info">
-                    <strong>Deportes</strong>
-                    <small>Partidos y jugadas</small>
-                </span>
-            </a>
-
-            <a href="canal.html?c=memes" class="chat reveal-x">
-                <span class="chat-icono"><svg class="icono"><use href="#i-smile"/></svg></span>
-                <span class="chat-info">
-                    <strong>Memes</strong>
-                    <small>Lo mejor del humor</small>
-                </span>
-            </a>
-        </div>
-
-        <a href="carpeta_php/logout.php" class="nav-link salir reveal-x">
-            <svg class="icono"><use href="#i-logout"/></svg>Cerrar sesión
-        </a>
-    </aside>
-
-
+    <!-- contenido-->
     <div class="contenido">
         <main class="canal-pagina">
 
-            <!-- Encabezado del canal-->
+            <!-- Encabezado del canal el nombre y la descripción los pone js/canal.js -->
             <header class="canal-cab">
                 <span class="canal-icono reveal-x">
                     <svg class="icono"><use id="canal-icono" href="#i-music"/></svg>
@@ -101,7 +47,7 @@
                 </div>
             </header>
 
-            <!-- Nueva publicación-->
+            <!-- Nueva publicación texto y si quieres, una foto -->
             <form class="composer reveal" id="composer" novalidate>
                 <span class="avatar" data-usuario="inicial"></span>
                 <div class="composer-campo">
@@ -126,6 +72,7 @@
                 </div>
             </form>
 
+            <!-- Aquí js/canal.js dibuja las publicaciones -->
             <section class="feed-canal" id="feed" aria-live="polite"></section>
 
         </main>
