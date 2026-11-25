@@ -1,7 +1,3 @@
-// Trae las barras de los lados desde barra.html y las pone en la página.
-// El HTML está en barra.html. Aquí solo se carga y se marca dónde estás.
-// En cada página: <script src="js/barra.js" defer></script>
-
 // Marca en la barra izquierda la sección donde estás (también la usa navegacion.js)
 function marcarActivo(url) {
     const destino = new URL(url || location.href, location.href);
