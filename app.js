@@ -63,7 +63,7 @@ if (formLogin) {
         }
 
         botonLogin.disabled = true;
-        botonLogin.textContent = 'Ingresando...';
+        botonLogin.textContent = 'Preparando tu experiencia...';
 
         try {
           const datos = await enviarFormulario('carpeta_php/login.php', {
@@ -126,7 +126,7 @@ if (formRegistro) {
         }
 
         botonRegistro.disabled = true;
-        botonRegistro.textContent = 'Creando cuenta...';
+        botonRegistro.textContent = 'Preparando la mejor experiencia...';
 
         try {
             const datos = await enviarFormulario('carpeta_php/registro.php', { username, email, password });
@@ -191,7 +191,7 @@ if (formOlvide) {
             botonOlvide.disabled = false;
             botonOlvide.textContent = textoBotonOlvide;
         }
-    });
+    });x
 }
 
 //  ESTO DE AQUI RESTABLECERA CONTRASEÑA CUANDO EL PISHI USUARIO DIGA ALV
